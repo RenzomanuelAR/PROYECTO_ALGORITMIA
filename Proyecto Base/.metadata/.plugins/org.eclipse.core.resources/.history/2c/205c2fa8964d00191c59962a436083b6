@@ -1,0 +1,114 @@
+package cibertec;
+
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+
+public class DialogoListado extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JScrollPane scpScroll;
+	private JTextArea txtS;
+	private JPanel pnlBotones;
+	private JButton btnCerrar;
+	private JButton btnListar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Throwable e) {
+			e.printStackTrace();
+		}
+		try {
+			DialogoListado dialog = new DialogoListado();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public DialogoListado() {
+		setModal(true);
+		setTitle("Listar alfajores");
+		setBounds(100, 100, 516, 359);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+
+		scpScroll = new JScrollPane();
+		scpScroll.setBounds(10, 11, 480, 265);
+		contentPanel.add(scpScroll);
+
+		txtS = new JTextArea();
+		txtS.setFont(new Font("Monospaced", Font.PLAIN, 12));
+		scpScroll.setViewportView(txtS);
+
+		pnlBotones = new JPanel();
+		pnlBotones.setBounds(156, 287, 188, 23);
+		contentPanel.add(pnlBotones);
+		pnlBotones.setLayout(null);
+
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(0, 0, 89, 23);
+		pnlBotones.add(btnCerrar);
+
+		btnListar = new JButton("Listar");
+		btnListar.addActionListener(this);
+		btnListar.setBounds(99, 0, 89, 23);
+		pnlBotones.add(btnListar);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnListar) {
+			actionPerformedBtnListar(e);
+		}
+		if (e.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(e);
+		}
+	}
+
+	protected void actionPerformedBtnCerrar(ActionEvent e) {
+
+	}
+
+	protected void actionPerformedBtnListar(ActionEvent e) {
+		txtS.setText("Listado de Perfumes\n\n");
+		mostrarAlfajor(Tienda.marca0, Tienda.precio0, Tienda.garantia0, Tienda.tamaño0, Tienda.sabor0);
+		mostrarAlfajor(Tienda.marca1, Tienda.precio1, Tienda.garantia, Tienda.peso1, Tienda.sabor1);
+		mostrarAlfajor(Tienda.marca2, Tienda.precio2, Tienda.garantia2, Tienda.peso2, Tienda.sabor2);
+		mostrarAlfajor(Tienda.marca3, Tienda.precio3, Tienda.garantia3, Tienda.peso3, Tienda.sabor3);
+		mostrarAlfajor(Tienda.marca4, Tienda.precio4, Tienda.garantia4, Tienda.peso4, Tienda.sabor4);
+	}
+
+	void imprimir(String s) {
+		txtS.append(s + "\n");
+	}
+	
+	void mostrarAlfajor(String mar, double pre, int con, double pes, String sab) {
+		imprimir("Marca      : " + mar);
+		imprimir("Precio     : S/ " + pre);
+		imprimir("Contenido  : " + con + " ud");
+		imprimir("Peso       : " + pes);
+		imprimir("Sabor      : " + sab + "\n");
+	}
+}

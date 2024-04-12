@@ -1,0 +1,105 @@
+package cibertec;
+
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class DialogoConfiguraObsequio extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JButton btnAceptar;
+	private JButton btnCancelar;
+	private JTextField txtObsequio;
+	private JLabel lblObsequio;
+	private JLabel lblCantidadMinima;
+	private JTextField txtCantidadMinima;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Throwable e) {
+			e.printStackTrace();
+		}
+		try {
+			DialogoConfiguraObsequio dialog = new DialogoConfiguraObsequio();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public DialogoConfiguraObsequio() {
+		setTitle("Configurar obsequio");
+		setResizable(false);
+		setModal(true);
+		setBounds(100, 100, 451, 158);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+
+		lblObsequio = new JLabel("Obsequio");
+		lblObsequio.setBounds(10, 36, 147, 14);
+		contentPanel.add(lblObsequio);
+
+		txtObsequio = new JTextField();
+		txtObsequio.setBounds(238, 33, 69, 20);
+		contentPanel.add(txtObsequio);
+		txtObsequio.setColumns(10);
+		txtObsequio.setText(Tienda.obsequio + "");
+
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(this);
+		btnAceptar.setBounds(346, 7, 89, 23);
+		contentPanel.add(btnAceptar);
+
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(this);
+		btnCancelar.setBounds(346, 32, 89, 23);
+		contentPanel.add(btnCancelar);
+		
+		lblCantidadMinima = new JLabel("Cantidad m\u00EDnima de colchones adquiridos");
+		lblCantidadMinima.setBounds(10, 11, 218, 14);
+		contentPanel.add(lblCantidadMinima);
+		
+		txtCantidadMinima = new JTextField();
+		txtCantidadMinima.setBounds(238, 8, 69, 20);
+		contentPanel.add(txtCantidadMinima);
+		txtCantidadMinima.setColumns(10);
+		txtCantidadMinima.setText(Tienda.cantidadMinimaObsequiable + "");
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancelar) {
+			actionPerformedBtnCancelar(e);
+		}
+		if (e.getSource() == btnAceptar) {
+			actionPerformedBtnAceptar(e);
+		}
+	}
+
+	protected void actionPerformedBtnAceptar(ActionEvent e) {
+
+	}
+
+	protected void actionPerformedBtnCancelar(ActionEvent e) {
+
+	}
+}

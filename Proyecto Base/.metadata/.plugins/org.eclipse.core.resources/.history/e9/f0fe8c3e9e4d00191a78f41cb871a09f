@@ -1,0 +1,93 @@
+package cibertec;
+
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class DialogoConfiguraCantidadOptima extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JLabel lblCantidadOptima;
+	private JTextField txtCantidadOptima;
+	private JButton btnAceptar;
+	private JButton btnCancelar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Throwable e) {
+			e.printStackTrace();
+		}
+		try {
+			DialogoConfiguraCantidadOptima dialog = new DialogoConfiguraCantidadOptima();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public DialogoConfiguraCantidadOptima() {
+		setTitle("Configurar cantidad \u00F3ptima de colchones vendidos");
+		setResizable(false);
+		setModal(true);
+		setBounds(100, 100, 438, 157);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+
+		lblCantidadOptima = new JLabel("Cantidad \u00F3ptima de colchones vendidos");
+		lblCantidadOptima.setBounds(10, 15, 226, 14);
+		contentPanel.add(lblCantidadOptima);
+
+		txtCantidadOptima = new JTextField();
+		txtCantidadOptima.setBounds(246, 12, 47, 20);
+		contentPanel.add(txtCantidadOptima);
+		txtCantidadOptima.setColumns(10);
+		txtCantidadOptima.setText(Tienda.cantidadOptima + "");
+
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(this);
+		btnAceptar.setBounds(328, 11, 89, 23);
+		contentPanel.add(btnAceptar);
+
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(this);
+		btnCancelar.setBounds(328, 36, 89, 23);
+		contentPanel.add(btnCancelar);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancelar) {
+			actionPerformedBtnCancelar(e);
+		}
+		if (e.getSource() == btnAceptar) {
+			actionPerformedBtnAceptar(e);
+		}
+	}
+
+	protected void actionPerformedBtnAceptar(ActionEvent e) {
+
+	}
+
+	protected void actionPerformedBtnCancelar(ActionEvent e) {
+
+	}
+}

@@ -1,0 +1,292 @@
+package cibertec;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.UIManager;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Tienda extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JMenuBar menuBar;
+	private JMenu mnuArchivo;
+	private JMenuItem mnuSalir;
+	private JMenu mnuMantenimiento;
+	private JMenuItem mnuConsultarPerfume;
+	private JMenuItem mnuModificarPerfume;
+	private JMenuItem mnuListarPerfumes;
+	private JMenu mnuVentas;
+	private JMenuItem mnuVender;
+	private JMenuItem mnuGenerarReportes;
+	private JMenu mnuConfiguracion;
+	private JMenuItem mnuConfigurarDescuentos;
+	private JMenuItem mnuConfigurarObsequio;
+	private JMenuItem mnuConfigurarCantidadOptima;
+	private JMenuItem mnuConfigurarPremioSorpresa;
+	private JMenu mnuAyuda;
+	private JMenuItem mnuAcercaDeTienda;
+	
+	// Datos mínimos del primer alfajor
+	public static String marca0 = "Suavestar";
+	public static double precio0 = 499.0;
+	public static int garantia0 = 5;
+	public static String tamaño0 = "1 1/2 Plaza";
+	public static String material0 = "Tela Tricot Acolchada";
+	
+	// Datos mínimos del segundo alfajor
+	public static String marca1 = "Paraiso";
+	public static double precio1 = 30.0;
+	public static int garantia = 24;
+	public static String tamaño1 = "2 Plazas";
+	public static String material1 = "Tejido de Punto con Algodón Orgánico";
+	
+	// Datos mínimos del tercer alfajor
+	public static String marca2 = "Cisne";
+	public static double precio2 = 16.8;
+	public static int garantia2 = 12;
+	public static String tamaño2 = "1 1/2 Plazas";
+	public static String material2 = "Tejido de Punto";
+	
+	// Datos mínimos del cuarto alfajor
+	public static String marca3 = "Drimer";
+	public static double precio3 = 32.4;
+	public static int garantia3 = 24;
+	public static String tamaño3 = "Queen";
+	public static String material3 = "Jacquard";
+	
+	// Datos mínimos del quinto alfajor
+	public static String marca4 = "Havanna";
+	public static double precio4 = 19.2;
+	public static int garantia4 = 12;
+	public static String tamaño4 = "2 Plazas";
+	public static String material4 = "Tejido de Punto";
+	
+	// Porcentajes de descuento
+	public static double porcentaje1 = 7.5;
+	public static double porcentaje2 = 10.0;
+	public static double porcentaje3 = 12.5;
+	public static double porcentaje4 = 15.0;
+	
+	// Cantidad óptima de cajas vendidas
+	public static int cantidadOptima = 40;
+	
+	// Cantidad mínima de cajas adquiridas para acceder al obsequio
+	public static int cantidadObsequiable = 18;
+		
+	// Obsequio por cantidad mínima de cajas adquiridas
+	public static String obsequio = "Billetera";
+	
+	// Número de cliente que recibe el premio sorpresa
+	public static int numeroClienteSorpresa = 5;
+	
+	// Premio sorpresa
+	public static String premioSorpresa = "Un polo";
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Throwable e) {
+			e.printStackTrace();
+		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Tienda frame = new Tienda();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Tienda() {
+		setTitle("Tienda 1.0");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 762, 465);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 746, 21);
+		contentPane.add(menuBar);
+
+		mnuArchivo = new JMenu("Archivo");
+		menuBar.add(mnuArchivo);
+
+		mnuSalir = new JMenuItem("Salir");
+		mnuSalir.addActionListener(this);
+		mnuArchivo.add(mnuSalir);
+
+		mnuMantenimiento = new JMenu("Mantenimiento");
+		menuBar.add(mnuMantenimiento);
+
+		mnuConsultarPerfume = new JMenuItem("Consultar perfume");
+		mnuConsultarPerfume.addActionListener(this);
+		mnuMantenimiento.add(mnuConsultarPerfume);
+
+		mnuModificarPerfume = new JMenuItem("Modificar perfume");
+		mnuModificarPerfume.addActionListener(this);
+		mnuMantenimiento.add(mnuModificarPerfume);
+
+		mnuListarPerfumes = new JMenuItem("Listar perfumes");
+		mnuListarPerfumes.addActionListener(this);
+		mnuMantenimiento.add(mnuListarPerfumes);
+
+		mnuVentas = new JMenu("Ventas");
+		mnuVentas.addActionListener(this);
+		menuBar.add(mnuVentas);
+
+		mnuVender = new JMenuItem("Vender");
+		mnuVender.addActionListener(this);
+		mnuVentas.add(mnuVender);
+
+		mnuGenerarReportes = new JMenuItem("Generar reportes");
+		mnuGenerarReportes.addActionListener(this);
+		mnuVentas.add(mnuGenerarReportes);
+
+		mnuConfiguracion = new JMenu("Configuraci\u00F3n");
+		menuBar.add(mnuConfiguracion);
+
+		mnuConfigurarDescuentos = new JMenuItem("Configurar descuentos");
+		mnuConfigurarDescuentos.addActionListener(this);
+		mnuConfiguracion.add(mnuConfigurarDescuentos);
+
+		mnuConfigurarObsequio = new JMenuItem("Configurar obsequio");
+		mnuConfigurarObsequio.addActionListener(this);
+		mnuConfiguracion.add(mnuConfigurarObsequio);
+
+		mnuConfigurarCantidadOptima = new JMenuItem("Configurar cantidad \u00F3ptima de perfumes vendidos");
+		mnuConfigurarCantidadOptima.addActionListener(this);
+		mnuConfiguracion.add(mnuConfigurarCantidadOptima);
+
+		mnuConfigurarPremioSorpresa = new JMenuItem("Configurar premio sorpresa");
+		mnuConfigurarPremioSorpresa.addActionListener(this);
+		mnuConfiguracion.add(mnuConfigurarPremioSorpresa);
+
+		mnuAyuda = new JMenu("Ayuda");
+		menuBar.add(mnuAyuda);
+
+		mnuAcercaDeTienda = new JMenuItem("Acerca de Tienda");
+		mnuAcercaDeTienda.addActionListener(this);
+		mnuAyuda.add(mnuAcercaDeTienda);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mnuConfigurarPremioSorpresa) {
+			actionPerformedMnuConfigurarPremioSorpresa(e);
+		}
+		if (e.getSource() == mnuModificarPerfume) {
+			actionPerformedMnuModificarPerfume(e);
+		}
+		if (e.getSource() == mnuSalir) {
+			actionPerformedMnuSalir(e);
+		}
+		if (e.getSource() == mnuConsultarPerfume) {
+			actionPerformedMnuConsultarPerfume(e);
+		}
+		if (e.getSource() == mnuListarPerfumes) {
+			actionPerformedMnuListarPerfumes(e);
+		}
+		if (e.getSource() == mnuVender) {
+			actionPerformedMnuVender(e);
+		}
+		if (e.getSource() == mnuGenerarReportes) {
+			actionPerformedMnuMostrarReportes(e);
+		}
+		if (e.getSource() == mnuConfigurarDescuentos) {
+			actionPerformedMnuConfigurarDescuentos(e);
+		}
+		if (e.getSource() == mnuConfigurarObsequio) {
+			actionPerformedMnuConfigurarObsequio(e);
+		}
+		if (e.getSource() == mnuConfigurarCantidadOptima) {
+			actionPerformedMnuConfigurarCantidadOptima(e);
+		}
+		if (e.getSource() == mnuAcercaDeTienda) {
+			actionPerformedMnuAcercaDeTienda(e);
+		}
+	}
+
+	protected void actionPerformedMnuSalir(ActionEvent e) {
+		System.exit(0);
+	}
+
+	protected void actionPerformedMnuConsultarPerfume(ActionEvent e) {
+		DialogoConsulta dlg = new DialogoConsulta();
+		dlg.setLocationRelativeTo(this);
+		dlg.setVisible(true);
+	}
+
+	protected void actionPerformedMnuModificarPerfume(ActionEvent e) {
+		DialogoModificacion dlg = new DialogoModificacion();
+		dlg.setLocationRelativeTo(this);
+		dlg.setVisible(true);
+	}
+
+	protected void actionPerformedMnuListarPerfumes(ActionEvent e) {
+		DialogoListado dlg = new DialogoListado();
+		dlg.setLocationRelativeTo(this);
+		dlg.setVisible(true);
+	}
+
+	protected void actionPerformedMnuVender(ActionEvent e) {
+		DialogoVentas dlg = new DialogoVentas();
+		dlg.setLocationRelativeTo(this);
+		dlg.setVisible(true);
+	}
+
+	protected void actionPerformedMnuMostrarReportes(ActionEvent e) {
+		DialogoReportes dlg = new DialogoReportes();
+		dlg.setLocationRelativeTo(this);
+		dlg.setVisible(true);
+	}
+
+	protected void actionPerformedMnuConfigurarDescuentos(ActionEvent e) {
+		DialogoConfiguraDescuentos dlg = new DialogoConfiguraDescuentos();
+		dlg.setLocationRelativeTo(this);
+		dlg.setVisible(true);
+	}
+
+	protected void actionPerformedMnuConfigurarObsequio(ActionEvent e) {
+		DialogoConfiguraObsequio dlg = new DialogoConfiguraObsequio();
+		dlg.setLocationRelativeTo(this);
+		dlg.setVisible(true);
+	}
+
+	protected void actionPerformedMnuConfigurarCantidadOptima(ActionEvent e) {
+		DialogoConfiguraCantidadOptima dlg = new DialogoConfiguraCantidadOptima();
+		dlg.setLocationRelativeTo(this);
+		dlg.setVisible(true);
+	}
+
+	protected void actionPerformedMnuConfigurarPremioSorpresa(ActionEvent e) {
+		DialogoConfiguraPremioSorpresa dlg = new DialogoConfiguraPremioSorpresa();
+		dlg.setLocationRelativeTo(this);
+		dlg.setVisible(true);
+	}
+
+	protected void actionPerformedMnuAcercaDeTienda(ActionEvent e) {
+		DialogoAcercaDeTienda dlg = new DialogoAcercaDeTienda();
+		dlg.setLocationRelativeTo(this);
+		dlg.setVisible(true);
+	}
+}

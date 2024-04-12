@@ -1,0 +1,140 @@
+package cibertec;
+
+import static cibertec.Tienda.marca0;
+import static cibertec.Tienda.marca1;
+import static cibertec.Tienda.marca2;
+import static cibertec.Tienda.marca3;
+import static cibertec.Tienda.marca4;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.UIManager;
+import javax.swing.JTextField;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class DialogoConsulta extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JLabel lblMarca;
+	private JLabel lblGarantia;
+	private JLabel lblMaterial;
+	private JTextField txtGarantia;
+	private JTextField txtMaterial;
+	private JButton btnCerrar;
+	private JLabel lblTamaño;
+	private JLabel lblPrecio;
+	private JTextField txtPrecio;
+	private JComboBox<String> cboMarca;
+	private JTextField txtTamaño;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Throwable e) {
+			e.printStackTrace();
+		}
+		try {
+			DialogoConsulta dialog = new DialogoConsulta();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public DialogoConsulta() {
+		setModal(true);
+		setTitle("Consultar alfajor");
+		setBounds(100, 100, 441, 327);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+
+		lblMarca = new JLabel("Marca");
+		lblMarca.setBounds(10, 15, 89, 14);
+		contentPanel.add(lblMarca);
+
+		lblPrecio = new JLabel("Precio (S/)");
+		lblPrecio.setBounds(10, 40, 89, 14);
+		contentPanel.add(lblPrecio);
+
+		lblGarantia = new JLabel("Garant\u00EDa (a\u00F1os)");
+		lblGarantia.setBounds(10, 65, 89, 14);
+		contentPanel.add(lblGarantia);
+
+		lblTamaño = new JLabel("Tama\u00F1o");
+		lblTamaño.setBounds(10, 90, 104, 14);
+		contentPanel.add(lblTamaño);
+
+		lblMaterial = new JLabel("Material");
+		lblMaterial.setBounds(10, 115, 89, 14);
+		contentPanel.add(lblMaterial);
+
+		cboMarca = new JComboBox<String>();
+		cboMarca.setModel(new DefaultComboBoxModel<String>(new String[] { marca0, marca1, marca2, marca3, marca4 }));
+		cboMarca.setBounds(124, 12, 146, 20);
+		contentPanel.add(cboMarca);
+
+		txtPrecio = new JTextField();
+		txtPrecio.setEditable(false);
+		txtPrecio.setBounds(124, 37, 146, 20);
+		contentPanel.add(txtPrecio);
+		txtPrecio.setColumns(10);
+		txtPrecio.setText("" + Tienda.precio0);
+
+		txtGarantia = new JTextField();
+		txtGarantia.setEditable(false);
+		txtGarantia.setBounds(124, 62, 146, 20);
+		contentPanel.add(txtGarantia);
+		txtGarantia.setColumns(10);
+		txtGarantia.setText("" + Tienda.contenido0);
+
+		txtMaterial = new JTextField();
+		txtMaterial.setEditable(false);
+		txtMaterial.setBounds(124, 112, 146, 20);
+		contentPanel.add(txtMaterial);
+		txtMaterial.setColumns(10);
+		txtMaterial.setText("" + Tienda.sabor0);
+		
+		txtTamaño = new JTextField();
+		txtTamaño.setEditable(false);
+		txtTamaño.setBounds(124, 87, 146, 20);
+		contentPanel.add(txtTamaño);
+		txtTamaño.setColumns(10);
+		txtTamaño.setText(Tienda.peso0 + "");
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(326, 11, 89, 23);
+		contentPanel.add(btnCerrar);
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(arg0);
+		}
+	}
+
+	protected void actionPerformedBtnCerrar(ActionEvent arg0) {
+		dispose();
+	}
+}

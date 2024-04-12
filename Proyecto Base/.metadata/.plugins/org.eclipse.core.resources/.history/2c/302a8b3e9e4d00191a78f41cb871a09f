@@ -1,0 +1,149 @@
+package cibertec;
+
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class DialogoConfiguraDescuentos extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JLabel lblPorcentaje1;
+	private JLabel lblPorcentaje2;
+	private JLabel lblPorcentaje3;
+	private JLabel lblPorcentaje4;
+	private JTextField txtPorcentaje1;
+	private JTextField txtPorcentaje2;
+	private JTextField txtPorcentaje3;
+	private JTextField txtPorcentaje4;
+	private JLabel lblPorDes1;
+	private JLabel lblPorDes2;
+	private JLabel lblPorDes3;
+	private JLabel lblPorDes4;
+	private JButton btnAceptar;
+	private JButton btnCancelar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Throwable e) {
+			e.printStackTrace();
+		}
+		try {
+			DialogoConfiguraDescuentos dialog = new DialogoConfiguraDescuentos();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public DialogoConfiguraDescuentos() {
+		setTitle("Configurar porcentajes de descuento");
+		setModal(true);
+		setResizable(false);
+		setBounds(100, 100, 425, 207);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+
+		lblPorcentaje1 = new JLabel("1 a 5 unidades");
+		lblPorcentaje1.setBounds(10, 15, 95, 14);
+		contentPanel.add(lblPorcentaje1);
+
+		lblPorcentaje2 = new JLabel("6 a 10 unidades");
+		lblPorcentaje2.setBounds(10, 40, 95, 14);
+		contentPanel.add(lblPorcentaje2);
+
+		lblPorcentaje3 = new JLabel("11 a 15 unidades");
+		lblPorcentaje3.setBounds(10, 65, 95, 14);
+		contentPanel.add(lblPorcentaje3);
+
+		lblPorcentaje4 = new JLabel("M\u00E1s de 15 unidades");
+		lblPorcentaje4.setBounds(10, 90, 95, 14);
+		contentPanel.add(lblPorcentaje4);
+
+		txtPorcentaje1 = new JTextField();
+		txtPorcentaje1.setBounds(115, 12, 86, 20);
+		contentPanel.add(txtPorcentaje1);
+		txtPorcentaje1.setColumns(10);
+		txtPorcentaje1.setText(Tienda.porcentaje1 + "");
+
+		txtPorcentaje2 = new JTextField();
+		txtPorcentaje2.setBounds(115, 37, 86, 20);
+		contentPanel.add(txtPorcentaje2);
+		txtPorcentaje2.setColumns(10);
+		txtPorcentaje2.setText(Tienda.porcentaje2 + "");
+
+		txtPorcentaje3 = new JTextField();
+		txtPorcentaje3.setBounds(115, 62, 86, 20);
+		contentPanel.add(txtPorcentaje3);
+		txtPorcentaje3.setColumns(10);
+		txtPorcentaje3.setText(Tienda.porcentaje3 + "");
+
+		txtPorcentaje4 = new JTextField();
+		txtPorcentaje4.setBounds(115, 87, 86, 20);
+		contentPanel.add(txtPorcentaje4);
+		txtPorcentaje4.setColumns(10);
+		txtPorcentaje4.setText(Tienda.porcentaje4 + "");
+
+		lblPorDes1 = new JLabel("%");
+		lblPorDes1.setBounds(211, 15, 11, 14);
+		contentPanel.add(lblPorDes1);
+
+		lblPorDes2 = new JLabel("%");
+		lblPorDes2.setBounds(211, 40, 11, 14);
+		contentPanel.add(lblPorDes2);
+
+		lblPorDes3 = new JLabel("%");
+		lblPorDes3.setBounds(211, 65, 11, 14);
+		contentPanel.add(lblPorDes3);
+
+		lblPorDes4 = new JLabel("%");
+		lblPorDes4.setBounds(211, 90, 11, 14);
+		contentPanel.add(lblPorDes4);
+
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(this);
+		btnAceptar.setBounds(320, 11, 89, 23);
+		contentPanel.add(btnAceptar);
+
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(this);
+		btnCancelar.setBounds(320, 36, 89, 23);
+		contentPanel.add(btnCancelar);
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCancelar) {
+			actionPerformedBtnCancelar(arg0);
+		}
+		if (arg0.getSource() == btnAceptar) {
+			actionPerformedBtnAceptar(arg0);
+		}
+	}
+
+	protected void actionPerformedBtnAceptar(ActionEvent arg0) {
+
+	}
+
+	protected void actionPerformedBtnCancelar(ActionEvent arg0) {
+
+	}
+}

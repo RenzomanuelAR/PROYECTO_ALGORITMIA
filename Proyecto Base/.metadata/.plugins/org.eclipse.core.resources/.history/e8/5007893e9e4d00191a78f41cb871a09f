@@ -1,0 +1,101 @@
+package cibertec;
+
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.JSeparator;
+
+public class DialogoAcercaDeTienda extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JButton btnCerrar;
+	private JLabel lblTienda;
+	private JSeparator separator;
+	private JLabel lblMarioSalazarRojas;
+	private JLabel lblDaniloSegoviaPonce;
+	private JLabel lblJorgePradoPozo;
+	private JLabel lblAutores;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Throwable e) {
+			e.printStackTrace();
+		}
+		try {
+			DialogoAcercaDeTienda dialog = new DialogoAcercaDeTienda();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public DialogoAcercaDeTienda() {
+		setTitle("Acerca de Tienda");
+		setResizable(false);
+		setModal(true);
+		setBounds(100, 100, 435, 231);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(168, 169, 89, 23);
+		contentPanel.add(btnCerrar);
+
+		lblTienda = new JLabel("Tienda 1.0");
+		lblTienda.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblTienda.setBounds(171, 11, 86, 20);
+		contentPanel.add(lblTienda);
+
+		separator = new JSeparator();
+		separator.setBounds(10, 42, 409, 8);
+		contentPanel.add(separator);
+
+		lblAutores = new JLabel("Autores");
+		lblAutores.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblAutores.setBounds(191, 61, 46, 14);
+		contentPanel.add(lblAutores);
+
+		lblMarioSalazarRojas = new JLabel("Débora Estrada Salazar");
+		lblMarioSalazarRojas.setBounds(158, 86, 113, 14);
+		contentPanel.add(lblMarioSalazarRojas);
+
+		lblDaniloSegoviaPonce = new JLabel("Raquel Sánchez Bardales");
+		lblDaniloSegoviaPonce.setBounds(154, 111, 120, 14);
+		contentPanel.add(lblDaniloSegoviaPonce);
+
+		lblJorgePradoPozo = new JLabel("Séfora Pérez Vega");
+		lblJorgePradoPozo.setBounds(170, 136, 89, 14);
+		contentPanel.add(lblJorgePradoPozo);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(e);
+		}
+	}
+
+	protected void actionPerformedBtnCerrar(ActionEvent e) {
+		dispose();
+	}
+}
