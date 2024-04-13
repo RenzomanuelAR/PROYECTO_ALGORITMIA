@@ -128,19 +128,10 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 		btnCerrar.setBounds(326, 33, 85, 21);
 		contentPane.add(btnCerrar);
 	}
-<<<<<<< HEAD
-	 
-=======
-	
-	 private final String[][] datosCocinas = {
-		        {"Mabe EMP6120PG0", "949.0", "60.0", "91.0", "58.6", "4"},
-		        {"Indurama Parma", "1,199.0", "75.0", "90.0", "60.0", "6"},
-		        {"Sole COSOL027", "799.0", "54.8", "88.9", "57.0", "4"},
-		        {"Coldex CX602", "849.0", "50.8", "88.9", "57.0", "4"},
-		        {"Reco Dakota", "699.0", "60.0", "85.0", "55.0", "4"},
-		    };
-	 
 
-
->>>>>>> fe07c58bf780582feace46ecba43a9be6df3dfdf
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
