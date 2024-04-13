@@ -1,11 +1,14 @@
 package cibertec;
 
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -49,7 +52,7 @@ public class Vender extends JFrame {
 	 */
 	public Vender() {
 		setTitle("Vender");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -98,5 +101,26 @@ public class Vender extends JFrame {
 		textArea = new JTextArea();
 		textArea.setBounds(12, 128, 412, 121);
 		contentPane.add(textArea);
+	}
+	
+	public void cerrar(){
+		try {
+			this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					confirmarSalida();
+				}
+			});
+			this.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void confirmarSalida() {
+		int valor =  JOptionPane.showConfirmDialog(this, "¿Esta seguro de cerrar la aplicación?","Advertencia",JOptionPane.YES_NO_OPTION);
+		if(valor==JOptionPane.YES_OPTION) {
+			JOptionPane.showMessageDialog(null, "Gracias","Gracias",JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+		}
 	}
 }

@@ -51,7 +51,7 @@ public class ConsultarCocina extends JFrame {
 	 */
 	public ConsultarCocina() {
 		setTitle("Consultar Cocina");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -134,58 +134,6 @@ public class ConsultarCocina extends JFrame {
 		        {"Reco Dakota", "699.0", "60.0", "85.0", "55.0", "4"},
 		    };
 	 
-	 public static void main(String[] args) {
-	        EventQueue.invokeLater(new Runnable() {
-	            public void run() {
-	                try {
-	                    ConsultarCocina frame = new ConsultarCocina();
-	                    frame.setVisible(true);
-	                } catch (Exception e) {
-	                    e.printStackTrace();
-	                }
-	            }
-	        });
-	    }
-	 
-	 public ConsultarCocina() {
-	        setTitle("Consultar Cocina");
-	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        setBounds(100, 100, 450, 300);
-	        contentPane = new JPanel();
-	        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-	        setContentPane(contentPane);
-	        contentPane.setLayout(null);
 
-	        // ... (Labels, ComboBox, TextFields, and Button - same as before)
 
-	        comboBoxModelo.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                String modeloSeleccionado = (String) comboBoxModelo.getSelectedItem();
-	                int indiceModelo = buscarIndiceModelo(modeloSeleccionado);
-
-	                if (indiceModelo != -1) {
-	                    textPrecio.setText(datosCocinas[indiceModelo][1]);
-	                    textAncho.setText(datosCocinas[indiceModelo][2]);
-	                    textAlto.setText(datosCocinas[indiceModelo][3]);
-	                    textFondo.setText(datosCocinas[indiceModelo][4]);
-	                    textQuemadores.setText(datosCocinas[indiceModelo][5]);
-	                } else {
-	                    // Show error message if model not found (optional)
-	                }
-	            }
-	        });
-
-	        // ... (Button closing)
-	    }
-
-	    private int buscarIndiceModelo(String modeloSeleccionado) {
-	        for (int i = 0; i < datosCocinas.length; i++) {
-	            if (datosCocinas[i][0].equals(modeloSeleccionado)) {
-	                return i;
-	            }
-	        }
-	        return -1;
-	    }
-	 
 }
