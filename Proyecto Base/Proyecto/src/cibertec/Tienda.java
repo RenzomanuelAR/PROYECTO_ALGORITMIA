@@ -216,10 +216,38 @@ public class Tienda extends JFrame implements ActionListener {
         	Vender frame = new Vender();
 			frame.setVisible(true);
         }
+        
         if (e.getSource()==mntmVentGenerar) {
         	GenerarReportes frame = new GenerarReportes();
 			frame.setVisible(true);
         }
+        
+        if (e.getSource()==mntmConfDescuento) {
+        	ConfigurarDescuentos frame = new ConfigurarDescuentos();
+			frame.setVisible(true);
+        }
+        
+        if (e.getSource()==mntmConfObsequio) {
+        	ConfigurarObsequios frame = new ConfigurarObsequios();
+			frame.setVisible(true);
+        }
+        
+        if (e.getSource()==mntmConfCantidad) {
+        	ConfigurarCantidadOptima frame = new ConfigurarCantidadOptima();
+			frame.setVisible(true);
+        }
+        
+        if (e.getSource()==mntmConfCuota) {
+        	ConfigurarCuotaDiaria frame = new ConfigurarCuotaDiaria();
+			frame.setVisible(true);
+        }
+        
+        if (e.getSource()==mntmAyudaAcerca) {
+        	AcercaTienda frame = new AcercaTienda();
+			frame.setVisible(true);
+        }
+ 
+ 
  
 	}
 }
