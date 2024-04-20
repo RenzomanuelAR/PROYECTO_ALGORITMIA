@@ -202,6 +202,16 @@ public class Tienda extends JFrame implements ActionListener {
 			frame.setVisible(true);
         }
         
+        if (e.getSource()==mntmMantModificar) {
+        	ModificarCocina frame = new ModificarCocina();
+			frame.setVisible(true);
+        }
+        
+        if (e.getSource()==mntmMantListar) {
+        	ListaCocina frame = new ListaCocina();
+			frame.setVisible(true);
+        }
+        
         if (e.getSource()==mntmVentVender) {
         	Vender frame = new Vender();
 			frame.setVisible(true);
