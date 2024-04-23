@@ -18,7 +18,8 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
-public class GenerarReporte extends JDialog implements ActionListener, ItemListener {
+public class GenerarReportes extends JDialog implements ActionListener, ItemListener {
+	
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -42,7 +43,7 @@ public class GenerarReporte extends JDialog implements ActionListener, ItemListe
 	 */
 	public static void main(String[] args) {
 		try {
-			GenerarReporte dialog = new GenerarReporte();
+			GenerarReportes dialog = new GenerarReportes();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -53,7 +54,7 @@ public class GenerarReporte extends JDialog implements ActionListener, ItemListe
 	/**
 	 * Create the dialog.
 	 */
-	public GenerarReporte() {
+	public GenerarReportes() {
 		setTitle("Generar reportes");
 		setBounds(100, 100, 666, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -98,8 +99,8 @@ public class GenerarReporte extends JDialog implements ActionListener, ItemListe
 		}
 	}
 	protected void itemStateChangedCboReporte(ItemEvent e) {
-		FrmVender ven=new FrmVender();
-		Proyecto prin=new Proyecto();
+		Vender ven=new Vender();
+		Tienda prin=new Tienda();
 		int tipo;
 		
 		tipo= tiporeporte();
@@ -110,130 +111,130 @@ public class GenerarReporte extends JDialog implements ActionListener, ItemListe
 			aportecuotadiaria();
 			mostrarrresultados(tipo);
 			
-			if (FrmVender.conuniven0 == 0)
-			    canoptim0 = 0;
-	else if (FrmVender.conuniven4 > Proyecto.cantidadOptima)
-			    canoptim0 = (FrmVender.conuniven0 - Proyecto.cantidadOptima);
-	else if (FrmVender.conuniven4 < Proyecto.cantidadOptima)
-		    canoptim0 = (Proyecto.cantidadOptima - FrmVender.conuniven0);
-	else
-		canoptim0 = (FrmVender.conuniven4 - Proyecto.cantidadOptima);
+			//	if (Vender.conuniven0 == 0)
+			//   canoptim0 = 0;
+			    //else if (Vender.conuniven4 > Tienda.cantidadOptima)
+			    //	    canoptim0 = (Vender.conuniven0 - Tienda.cantidadOptima);
+			    //else if (Vender.conuniven4 < Tienda.cantidadOptima)
+			    //    canoptim0 = (Tienda.cantidadOptima - Vender.conuniven0);
+			    //else
+		//	canoptim0 = (Vender.conuniven4 - Tienda.cantidadOptima);
 	 	
-	 	if (FrmVender.conuniven1 == 0)
-		    canoptim1 = 0;
-	else if (FrmVender.conuniven1 > Proyecto.cantidadOptima)
-		    canoptim1 = (FrmVender.conuniven1 - Proyecto.cantidadOptima);
-	else if (FrmVender.conuniven1 < Proyecto.cantidadOptima)
-		    canoptim1 = (Proyecto.cantidadOptima - FrmVender.conuniven1);
-	else
-		canoptim1 = (FrmVender.conuniven1 - Proyecto.cantidadOptima);
+			//	if (Vender.conuniven1 == 0)
+			//    canoptim1 = 0;
+		    //else if (Vender.conuniven1 > Tienda.cantidadOptima)
+			//   canoptim1 = (Vender.conuniven1 - Tienda.cantidadOptima);
+			//else if (Vender.conuniven1 < Tienda.cantidadOptima)
+			//	    canoptim1 = (Tienda.cantidadOptima - Vender.conuniven1);
+			//else
+			//	canoptim1 = (Vender.conuniven1 - Tienda.cantidadOptima);
    
-	 	if (FrmVender.conuniven2 == 0)
-		    canoptim2 = 0;
-	else if (FrmVender.conuniven2 > Proyecto.cantidadOptima)
-		    canoptim2 = (FrmVender.conuniven2 - Proyecto.cantidadOptima);
-	else if (FrmVender.conuniven0 < Proyecto.cantidadOptima)
-		    canoptim2 = (Proyecto.cantidadOptima - FrmVender.conuniven2);
-	else
-		canoptim2 = (FrmVender.conuniven2 - Proyecto.cantidadOptima);
+			//	if (Vender.conuniven2 == 0)
+			// canoptim2 = 0;
+			//else if (Vender.conuniven2 > Tienda.cantidadOptima)
+			//    canoptim2 = (Vender.conuniven2 - Tienda.cantidadOptima);
+			//else if (Vender.conuniven0 < Tienda.cantidadOptima)
+			//	    canoptim2 = (Tienda.cantidadOptima - Vender.conuniven2);
+			//else
+			//canoptim2 = (Vender.conuniven2 - Tienda.cantidadOptima);
    
-	 	if (FrmVender.conuniven3 == 0)
-		    canoptim3 = 0;
-	else if (FrmVender.conuniven3 > Proyecto.cantidadOptima)
-		    canoptim3 = (FrmVender.conuniven3 - Proyecto.cantidadOptima);
-	else if (FrmVender.conuniven3 < Proyecto.cantidadOptima)
-		    canoptim3 = (Proyecto.cantidadOptima - FrmVender.conuniven3);
-	else
-		canoptim3 = (FrmVender.conuniven3 - Proyecto.cantidadOptima);
+			//	if (Vender.conuniven3 == 0)
+			//   canoptim3 = 0;
+			//else if (Vender.conuniven3 > Tienda.cantidadOptima)
+			//    canoptim3 = (Vender.conuniven3 - Tienda.cantidadOptima);
+			//else if (Vender.conuniven3 < Tienda.cantidadOptima)
+			//	    canoptim3 = (Tienda.cantidadOptima - Vender.conuniven3);
+			//else
+			//	canoptim3 = (Vender.conuniven3 - Tienda.cantidadOptima);
   
-	 	if (FrmVender.conuniven4 == 0)
-		    canoptim4 = 0;
-	else if (FrmVender.conuniven4 > Proyecto.cantidadOptima)
-		    canoptim4 = (FrmVender.conuniven4 - Proyecto.cantidadOptima);
-	else if (FrmVender.conuniven4 < Proyecto.cantidadOptima)
-		    canoptim4 = (Proyecto.cantidadOptima - FrmVender.conuniven4);
-	else
-		canoptim4 = (FrmVender.conuniven4 - Proyecto.cantidadOptima);
+			//	if (Vender.conuniven4 == 0)
+			//    canoptim4 = 0;
+			//else if (Vender.conuniven4 > Tienda.cantidadOptima)
+			//  canoptim4 = (Vender.conuniven4 - Tienda.cantidadOptima);
+			//else if (Vender.conuniven4 < Tienda.cantidadOptima)
+			//canoptim4 = (Tienda.cantidadOptima - Vender.conuniven4);
+			//else
+			//canoptim4 = (Vender.conuniven4 - Tienda.cantidadOptima);
 			
 
-			     if (FrmVender.conuniven0 == 0)
+			// if (//Vender.conuniven0 == 0)
 				     textos0 = "";
-				 else if (FrmVender.conuniven0 > Proyecto.cantidadOptima)
+				     // else if (Vender.conuniven0 > Tienda.cantidadOptima)
 					 textos0 = "más que la cantidad óptima";
-				 else if (FrmVender.conuniven0 < Proyecto.cantidadOptima)
+					 // else if (Vender.conuniven0 < Tienda.cantidadOptima)
 					 textos0 = "menos que la cantidad óptima";
-				 else 
+					 //	 else 
 					 textos0 = "igual a la cantidad óptima";	     
-			     if (FrmVender.conuniven1 == 0)
+				 //  if (Vender.conuniven1 == 0)
 				     textos1 = "";
-				 else if (FrmVender.conuniven1 > Proyecto.cantidadOptima)
+				     // else if (Vender.conuniven1 > Tienda.cantidadOptima)
 					 textos1 = "más que la cantidad óptima";
-				 else if (FrmVender.conuniven1 < Proyecto.cantidadOptima)
+					 // else if (Vender.conuniven1 < Tienda.cantidadOptima)
 					 textos1 = "menos que la cantidad óptima";
-				 else 
+					 //	 else 
 					 textos1 = "igual a la cantidad óptima";	 
-			     if (FrmVender.conuniven2 == 0)
+				 //  if (Vender.conuniven2 == 0)
 				     textos2 = "";
-				 else if (FrmVender.conuniven2 > Proyecto.cantidadOptima)
+				     // else if (Vender.conuniven2 > Tienda.cantidadOptima)
 					 textos2 = "más que la cantidad óptima";
-				 else if (FrmVender.conuniven2 < Proyecto.cantidadOptima)
+					 // else if (Vender.conuniven2 < Tienda.cantidadOptima)
 					 textos2 = "menos que la cantidad óptima";
-				 else 
+					 // else 
 					 textos2 = "igual a la cantidad óptima";			 
-			     if (FrmVender.conuniven3 == 0)
+				 // if (Vender.conuniven3 == 0)
 				     textos3 = "";
-				 else if (FrmVender.conuniven3 > Proyecto.cantidadOptima)
+				     // else if (Vender.conuniven3 > Tienda.cantidadOptima)
 					 textos3 = "más que la cantidad óptima";
-				 else if (FrmVender.conuniven3 < Proyecto.cantidadOptima)
+					 // else if (Vender.conuniven3 < Tienda.cantidadOptima)
 					 textos3 = "menos que la cantidad óptima";
-				 else 
+					 // else 
 					 textos3 = "igual a la cantidad óptima";	 
-			     if (FrmVender.conuniven4 == 0)
+				 //  if (Vender.conuniven4 == 0)
 				     textos4 = "";
-				 else if (FrmVender.conuniven4 > Proyecto.cantidadOptima)
+				     // else if (Vender.conuniven4 > Tienda.cantidadOptima)
 					 textos4 = "más que la cantidad óptima";
-				 else if (FrmVender.conuniven4 < Proyecto.cantidadOptima)
+					 // else if (Vender.conuniven4 < Tienda.cantidadOptima)
 					 textos4 = "menos que la cantidad óptima";
-				 else 
+					 // else 
 					 textos4 = "igual a la cantidad óptima";
 	}
 	int tiporeporte() {
 		return cboReporte.getSelectedIndex();
 	}
 	void mostrarmodelo() {
-		model0 =Proyecto.modelo0;
-		model1 =Proyecto.modelo1;
-		model2 =Proyecto.modelo2;
-		model3 =Proyecto.modelo3;
-		model4 =Proyecto.modelo4;
+		model0 =Tienda.marca0;
+		model1 =Tienda.marca1;
+		model2 =Tienda.marca2;
+		model3 =Tienda.marca3;
+		model4 =Tienda.marca4;
 		}
 	void mostrarventas() {
-			cven0 = FrmVender.canven0;
-			cven1 = FrmVender.canven1;
-			cven2 = FrmVender.canven2;
-		    cven3 = FrmVender.canven3;
-			cven4 = FrmVender.canven4;
+		    //cven0 = Vender.canven0;
+			//cven1 = Vender.canven1;
+			//cven2 = Vender.canven2;
+			//cven3 = Vender.canven3;
+		    //cven4 = Vender.canven4;
 		}
 	void cantidadunidadesvendidas() {
-			cuniven0 = FrmVender.conuniven0;
-			cuniven1 = FrmVender.conuniven1;
-			cuniven2 = FrmVender.conuniven2;
-			cuniven3 = FrmVender.conuniven3;
-			cuniven4 = FrmVender.conuniven4;
+		//cuniven0 = Vender.conuniven0;
+		//cuniven1 = Vender.conuniven1;
+		//cuniven2 = Vender.conuniven2;
+		//cuniven3 = Vender.conuniven3;
+		//cuniven4 = Vender.conuniven4;
 		}
 		void importetotal() {
-			imptot0 =FrmVender.impcom0;
-			imptot1 =FrmVender.impcom1;
-			imptot2 =FrmVender.impcom2;
-			imptot3 =FrmVender.impcom3;
-			imptot4 =FrmVender.impcom4;
+			//imptot0 =Vender.impcom0;
+			//imptot1 =Vender.impcom1;
+			//imptot2 =Vender.impcom2;
+			//imptot3 =Vender.impcom3;
+			//imptot4 =Vender.impcom4;
 		}
 		void aportecuotadiaria() {
-			cuodia0 = (FrmVender.impcom0/5)/100;
-			cuodia1 = (FrmVender.impcom1/5)/100;
-			cuodia2 = (FrmVender.impcom2/5)/100;
-			cuodia3 = (FrmVender.impcom3/5)/100;
-			cuodia4 = (FrmVender.impcom4/5)/100;	
+			//cuodia0 = (Vender.impcom0/5)/100;
+			//cuodia1 = (Vender.impcom1/5)/100;
+			//cuodia2 = (Vender.impcom2/5)/100;
+			//cuodia3 = (Vender.impcom3/5)/100;
+			//cuodia4 = (Vender.impcom4/5)/100;	
 	}
 
 	void mostrarrresultados(int tipo) {
@@ -241,27 +242,27 @@ public class GenerarReporte extends JDialog implements ActionListener, ItemListe
 		case 0 :
 			txtS.setText("");
 			imprimir(" VENTAS POR MODELO  :"+ "\n\n");
-			imprimir(" Modelo                                                        : " + model0);
+			imprimir(" Marca                                                        : " + model0);
 			imprimir(" Cantidad de ventas                                  : " + cven0);
 			imprimir(" Cantidad total de unidades vendidas  : " + cuniven0);
 			imprimir(" Importe total vendido                               : " + imptot0);
 			imprimir(" Aporte a la cuota diaria                           : " + cuodia0 + "%"+"\n");
-			imprimir(" Modelo                                                        : " + model1);
+			imprimir(" Marca                                                        : " + model1);
 			imprimir(" Cantidad de ventas                                  : " + cven1);
 			imprimir(" Cantidad total de unidades vendidas  : " + cuniven1);
 			imprimir(" Importe total vendido                               : " + imptot1);
 			imprimir(" Aporte a la cuota diaria                           : " + cuodia1 + "%"+"\n");
-			imprimir(" Modelo                                                        : " + model2);
+			imprimir(" Marca                                                        : " + model2);
 			imprimir(" Cantidad de ventas                                  : " + cven2);
 			imprimir(" Cantidad total de unidades vendidas  : " + cuniven2);
 			imprimir(" Importe total vendido                               : " + imptot2);
 			imprimir(" Aporte a la cuota diaria                           : " + cuodia2 + "%"+"\n");	
-		    imprimir(" Modelo                                                        : " + model3);
+		    imprimir(" Marca                                                        : " + model3);
 			imprimir(" Cantidad de ventas                                  : " + cven3);
 			imprimir(" Cantidad total de unidades vendidas  : " + cuniven3);
 			imprimir(" Importe total vendido                               : " + imptot3);
 			imprimir(" Aporte a la cuota diaria                           : " + cuodia3 + "%"+"\n");
-			imprimir(" Modelo                                                        : " + model4);
+			imprimir(" Marca                                                        : " + model4);
 			imprimir(" Cantidad de ventas                                  : " + cven4);
 			imprimir(" Cantidad total de unidades vendidas  : " + cuniven4);
 			imprimir(" Importe total vendido                               : " + imptot4);
@@ -270,49 +271,46 @@ public class GenerarReporte extends JDialog implements ActionListener, ItemListe
 		case 1 :
 			txtS.setText("");
 			imprimir(" VENTAS EN RELACIÓN A LA VENTA ÓPTIMA :"+ "\n\n");
-			imprimir("  Modelo                                               : " + model0);
+			imprimir(" Marca                                               : " + model0);
 			imprimir(" Cantidad de unidades vendidas   : " + (cuniven0)+" "+"("+ (canoptim1)+ " " +(textos0)+")" +"\n");
-			imprimir("  Modelo                                               : " + model1);
+			imprimir(" Marca                                               : " + model1);
 			imprimir(" Cantidad de unidades vendidas   : " + (cuniven1)+" "+"("+ (canoptim1)+ " " +(textos1)+")" +"\n");
-			imprimir("  Modelo                                               : " + model2);
+			imprimir(" Marca                                               : " + model2);
 			imprimir(" Cantidad de unidades vendidas   : " + (cuniven2)+" "+"("+ (canoptim2)+ " " +(textos2)+")" +"\n");
-			imprimir("  Modelo                                               : " + model3);
+			imprimir(" Marca                                               : " + model3);
 			imprimir(" Cantidad de unidades vendidas   : " + (cuniven3)+" "+"("+ (canoptim3)+ " " +(textos3)+")" +"\n");
-			imprimir("  Modelo                                               : " + model4);
+			imprimir(" Marca                                               : " + model4);
 			imprimir(" Cantidad de unidades vendidas   : " + (cuniven4)+" "+"("+ (canoptim4)+ " " +(textos4)+")");
 			return;
 		case 2 :
 			txtS.setText("");
 			imprimir(" PRECIOS EN RELACIÓN AL PRECIO PROMEDIO :"+ "\n\n");
-			imprimir(" Modelo : " + model0);
-			imprimir(" Precio   : " +"S/ ."+" "+(Proyecto.precio0)+"(Mayor al promedio)"+"\n");
-			imprimir(" Modelo : " + model1);
-			imprimir(" Precio   : " +"S/ ."+" "+(Proyecto.precio1)+"(Mayor al promedio)"+"\n");
-			imprimir(" Modelo : " + model2);
-			imprimir(" Precio   : " +"S/ ."+" "+(Proyecto.precio2)+"(Menor al promedio)"+"\n");
-			imprimir(" Modelo : " + model3);
-			imprimir(" Precio   : " +"S/ ."+" "+(Proyecto.precio3)+"(Menor al promedio)"+"\n");
-			imprimir(" Modelo : " + model4);
-			imprimir(" Precio   : " +"S/ ."+" "+(Proyecto.precio4)+"(Menor al promedio)");
+			imprimir(" Marca    : " + model0);
+			imprimir(" Precio   : " +"S/ ."+" "+(Tienda.precio0)+"(Mayor al promedio)"+"\n");
+			imprimir(" Marca    : " + model1);
+			imprimir(" Precio   : " +"S/ ."+" "+(Tienda.precio1)+"(Mayor al promedio)"+"\n");
+			imprimir(" Marca    : " + model2);
+			imprimir(" Precio   : " +"S/ ."+" "+(Tienda.precio2)+"(Menor al promedio)"+"\n");
+			imprimir(" Marca    : " + model3);
+			imprimir(" Precio   : " +"S/ ."+" "+(Tienda.precio3)+"(Menor al promedio)"+"\n");
+			imprimir(" Marca    : " + model4);
+			imprimir(" Precio   : " +"S/ ."+" "+(Tienda.precio4)+"(Menor al promedio)");
 			return;
 		default :
 			txtS.setText("");
 			imprimir(" PROMEDIOS, MENORES Y MAYORES :"+ "\n\n");
-			imprimir(" Precio promedio             : " + "S/."+ Proyecto.precio0);
-			imprimir(" Precio menor                   : " + "S/."+ Proyecto.precio3);
-			imprimir(" Precio mayor                    : " + "S/."+ Proyecto.precio1 +"\n");
-			imprimir(" Ancho promedio              : " + Proyecto.ancho4 +"  cm");
-			imprimir(" Ancho menor                    : " + Proyecto.ancho0 +"  cm");
-			imprimir(" Ancho mayor                    : " + Proyecto.ancho1 +"  cm" +"\n");
-			imprimir(" Alto promedio                   : " + Proyecto.alto2 +"  cm");
-			imprimir(" Alto menor                         : " + Proyecto.alto0 +"  cm");
-			imprimir(" Alto mayor                          : " + Proyecto.alto3 +"  cm" +"\n");
-			imprimir(" Fondo promedio               : " + Proyecto.fondo4 + "  cm");
-			imprimir(" Fondo menor                    : " + Proyecto.fondo2 +"  cm");
-			imprimir(" Fondo mayor                    : " + Proyecto.fondo1 +"  cm" +"\n");
-			imprimir(" Quemadores promedio : " + Proyecto.quemadores3);
-			imprimir(" Quemadores menor        : " + Proyecto.quemadores0);
-			imprimir( "Quemadores mayor         : " + Proyecto.quemadores1);
+			imprimir(" Precio promedio                : " + "S/."+ Tienda.precio0);
+			imprimir(" Precio menor                   : " + "S/."+ Tienda.precio3);
+			imprimir(" Precio mayor                   : " + "S/."+ Tienda.precio1 + "\n");
+			imprimir(" Garantia promedio              : " + Tienda.garantia4);
+			imprimir(" Garantia menor                 : " + Tienda.garantia0);
+			imprimir(" Garantia mayor                 : " + Tienda.garantia + "\n");
+			imprimir(" Tamaño promedio                : " + Tienda.tamanio2);
+			imprimir(" Tamaño menor                   : " + Tienda.tamanio0);
+			imprimir(" Tamaño mayor                   : " + Tienda.tamanio3 + "\n");
+			imprimir(" Material promedio              : " + Tienda.material0);
+			imprimir(" Material menor                 : " + Tienda.material2);
+			imprimir(" Material mayor                 : " + Tienda.material0);
 		}
 	
 	}
@@ -322,4 +320,5 @@ public class GenerarReporte extends JDialog implements ActionListener, ItemListe
 		}
 	
 }
+
 
