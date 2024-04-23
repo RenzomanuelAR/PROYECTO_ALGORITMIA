@@ -18,7 +18,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
-public class FrmGenerarReporte extends JDialog implements ActionListener, ItemListener {
+public class GenerarReporte extends JDialog implements ActionListener, ItemListener {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -42,7 +42,7 @@ public class FrmGenerarReporte extends JDialog implements ActionListener, ItemLi
 	 */
 	public static void main(String[] args) {
 		try {
-			FrmGenerarReporte dialog = new FrmGenerarReporte();
+			GenerarReporte dialog = new GenerarReporte();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -53,7 +53,7 @@ public class FrmGenerarReporte extends JDialog implements ActionListener, ItemLi
 	/**
 	 * Create the dialog.
 	 */
-	public FrmGenerarReporte() {
+	public GenerarReporte() {
 		setTitle("Generar reportes");
 		setBounds(100, 100, 666, 300);
 		getContentPane().setLayout(new BorderLayout());
