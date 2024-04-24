@@ -24,7 +24,6 @@ public class AcercaTienda extends JFrame implements ActionListener {
 	private JLabel lblRenzo;
 	private JLabel lblAlumno1_2;
 	private JLabel lblAlumno1_3;
-	private JLabel lblAlumno1_4;
 	private JSeparator separator;
 
 	/**
@@ -72,7 +71,7 @@ public class AcercaTienda extends JFrame implements ActionListener {
 		btnCerrar.setBounds(162, 227, 89, 23);
 		contentPane.add(btnCerrar);
 		
-		lblAlumno1 = new JLabel("Luis");
+		lblAlumno1 = new JLabel("Luis Vilchez Gonzales");
 		lblAlumno1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlumno1.setBounds(78, 81, 257, 14);
 		contentPane.add(lblAlumno1);
@@ -82,20 +81,15 @@ public class AcercaTienda extends JFrame implements ActionListener {
 		lblRenzo.setBounds(78, 106, 257, 14);
 		contentPane.add(lblRenzo);
 		
-		lblAlumno1_2 = new JLabel("Luis");
+		lblAlumno1_2 = new JLabel("Kevin Espinoza Gargate");
 		lblAlumno1_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlumno1_2.setBounds(78, 131, 257, 14);
 		contentPane.add(lblAlumno1_2);
 		
-		lblAlumno1_3 = new JLabel("Luis");
+		lblAlumno1_3 = new JLabel("Juan Cardenas Orozco");
 		lblAlumno1_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlumno1_3.setBounds(78, 156, 257, 14);
 		contentPane.add(lblAlumno1_3);
-		
-		lblAlumno1_4 = new JLabel("Luis");
-		lblAlumno1_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAlumno1_4.setBounds(78, 181, 257, 14);
-		contentPane.add(lblAlumno1_4);
 		
 		separator = new JSeparator();
 		separator.setBounds(10, 36, 414, 2);
