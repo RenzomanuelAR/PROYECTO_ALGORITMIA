@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -17,61 +19,72 @@ public class Tienda extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	
-	// Datos m�nimos del primer colch�n
-	public static String marca0 = "Suavestar";
-	public static double precio0 = 499.0;
-	public static int garantia0 = 7;
-	public static String tamanio0 = "1 1/2 Plaza";
-	public static String material0 = "Tela Tricot Acolchada";
+	// Datos mínimos de la primera cocina 
 	
-	// Datos m�nimos del segundo colch�n
-	public static String marca1 = "Springwall";
-	public static double precio1 = 679.0;
-	public static int garantia = 10;
-	public static String tamanio1 = "2 Plazas";
-	public static String material1 = "Tejido de Punto con Algodón Orgánico";
+	public static String modelo0 = "Mabe EMP6120PG0"; 
+	public static double precio0 = 949.0;
 	
-	// Datos m�nimos del tercer colch�n
-	public static String marca2 = "Paraiso";
-	public static double precio2 = 479.0;
-	public static int garantia2 = 5;
-	public static String tamanio2 = "1 1/2 Plazas";
-	public static String material2 = "Tejido de Punto";
+	public static double fondo0 = 58.6; 
+	public static double ancho0 = 60.0; 
+	public static double alto0 = 91.0; 
+	public static int quemadores0 = 4; 
+	// Datos mínimos de la segunda cocina 
+	public static String modelo1 = "Indurama Parma"; 
+	public static double precio1 = 1089.0; 
+	public static double ancho1 = 80.0; 
+	public static double alto1 = 94.0;  
+	public static double fondo1 = 67.5; 
+	public static int quemadores1 = 6; 
+	// Datos mínimos de la tercera cocina 
+	public static String modelo2 = "Sole COSOL027"; 
+	public static double precio2 = 850.0; 
+	public static double ancho2 = 60.0; 
+	public static double alto2 = 90.0; 
+	public static double fondo2 = 50.0; 
+	public static int quemadores2 = 4; 
+	// Datos mínimos de la cuarta cocina 
+	public static String modelo3 = "Coldex CX602"; 
+	public static double precio3 = 629.0; 
+	public static double ancho3 = 61.6; 
+	public static double alto3 = 95.0; 
+	public static double fondo3 = 51.5; 
+	public static int quemadores3 = 5; 
+	// Datos mínimos de la quinta cocina 
+	public static String modelo4 = "Reco Dakota"; 
+	public static double precio4 = 849.0; 
+	public static double ancho4 = 75.4; 
+	public static double alto4 = 94.5; 
+	public static double fondo4 = 66.0; 
+	public static int quemadores4 = 5; 
+	// Porcentajes de descuento 
+	public static double porcentaje1 = 7.5; 
+	public static double porcentaje2 = 10.0; 
+	public static double porcentaje3 = 12.5; 
+	public static double porcentaje4 = 15.0; 
+	// Obsequios 
+	public static String obsequio1 = "Cafetera"; 
+	public static String obsequio2 = "Licuadora"; 
+	public static String obsequio3 = "Extractor"; 
+	// Cantidad óptima de unidades vendidas 
+	public static int cantidadOptima = 30; 
+	// Cuota diaria 
+	public static double cuotaDiaria = 75000;
 	
-	// Datos m�nimos del cuarto colch�n
-	public static String marca3 = "Drimer";
-	public static double precio3 = 749.0;
-	public static int garantia3 = 4;
-	public static String tamanio3 = "Queen";
-	public static String material3 = "Jacquard";
+
+	public static Object[][] datosCocinas = {
+		        { "Mabe EMP6120PG0", 949.0, 60.0, 91.0, 58.6, 4 },
+		        { "Indurama Parma", 1089.0, 80.0, 94.0, 67.5, 6 },
+		        { "Sole COSOL027", 850.0, 60.0, 90.0, 50.0, 4 },
+		        { "Coldex CX602", 629.0, 61.6, 95.0, 51.5, 5 },
+		        { "Reco Dakota", 849.0, 75.4, 94.5, 66.0, 5 }
+	 };
+	 
+	public static List<Object[]> datosVentas = new ArrayList<Object[]>();
 	
-	// Datos m�nimos del quinto colch�n
-	public static String marca4 = "Cisne";
-	public static double precio4 = 389.0;
-	public static int garantia4 = 2;
-	public static String tamanio4 = "1 1/2 Plazas";
-	public static String material4 = "Tejido de Punto";
-	
-	// Porcentajes de descuento
-	public static double porcentaje1 = 7.5;
-	public static double porcentaje2 = 10.0;
-	public static double porcentaje3 = 12.5;
-	public static double porcentaje4 = 15.0;
-	
-	// Cantidad �ptima de colchones vendidos
-	public static int cantidadOptima = 10;
-	
-	// Cantidad m�nima de colchones adquiridos para acceder al obsequio
-	public static int cantidadMinimaObsequiable = 3;
-		
-	// Obsequio por cantidad m�nima de colchones adquiridos
-	public static String obsequio = "USB";
-	
-	// N�mero de cliente que recibe el premio sorpresa
-	public static int numeroClienteSorpresa = 5;
-	
-	// Premio sorpresa
-	public static String premioSorpresa = "Un polo";
+	// contador de ventas
+	public static int contarVentas = 0; 
+	public static Double totalVentas = 0.0;
+	public static Double porcentajeVentas = 0.0;
 	private JMenuBar menuBar;
 	private JMenu mnArchivo;
 	private JMenu mnMantenimiento;
