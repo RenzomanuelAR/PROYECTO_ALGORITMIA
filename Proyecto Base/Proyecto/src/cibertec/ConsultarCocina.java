@@ -47,6 +47,15 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 			}
 		});
 	}
+	
+	 private static final Object[][] datosCocinas = {
+		        { "Mabe EMP6120PG0", 949.0, 60.0, 91.0, 58.6, 4 },
+		        { "Indurama Parma", 1089.0, 80.0, 94.0, 67.5, 6 },
+		        { "Sole COSOL027", 850.0, 60.0, 90.0, 50.0, 4 },
+		        { "Coldex CX602", 629.0, 61.6, 95.0, 51.5, 5 },
+		        { "Reco Dakota", 849.0, 75.4, 94.5, 66.0, 5 }
+		    };
+
 
 	/**
 	 * Create the frame.
@@ -93,7 +102,15 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 		
 		comboBoxModelo = new JComboBox();
 		comboBoxModelo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {"Mabe EMP6120PG0", "Indurama Parma", "Sole COSOL027", "Coldex CX602", "Reco Dakota"}));
+		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {"MabeEMP6120PG0", "InduramaParma", "SoleCOSOL027", "ColdexCX602", "RecoDakota"}));
+		
+		comboBoxModelo.addActionListener(e -> {
+            String seleccion = (String) comboBoxModelo.getSelectedItem();
+            mostrarDatosCocina(seleccion);
+        });
+		
+		mostrarDatosCocina("MabeEMP6120PG0");
+		
 		comboBoxModelo.setBounds(144, 30, 163, 21);
 		contentPane.add(comboBoxModelo);
 		
@@ -127,11 +144,40 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnCerrar.setBounds(326, 33, 85, 21);
 		contentPane.add(btnCerrar);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		
+		// Mostrar automáticamente los datos de la primera cocina al iniciar la ventana
+        mostrarDatosCocina((String) datosCocinas[0][0]);
 	}
+	
+	private void mostrarDatosCocina(String seleccion) {
+		for (Object[] datos : datosCocinas) {
+            String modelo = (String) datos[0];
+            if (modelo.equals(seleccion)) {
+                double precio = (double) datos[1];
+                double ancho = (double) datos[2];
+                double alto = (double) datos[3];
+                double fondo = (double) datos[4];
+                int quemadores = (int) datos[5];
+
+                textPrecio.setText(String.valueOf(precio));
+                textAncho.setText(String.valueOf(ancho));
+                textAlto.setText(String.valueOf(alto));
+                textFondo.setText(String.valueOf(fondo));
+                textQuemadores.setText(String.valueOf(quemadores));
+                break;
+            }
+        }
+    }
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent e)   {
+        if (e.getSource() == btnCerrar) {
+            dispose();
+        } else if (e.getSource() == comboBoxModelo) {
+            String seleccion = (String) comboBoxModelo.getSelectedItem();
+            mostrarDatosCocina(seleccion);
+        }
+    }
+	
 }
