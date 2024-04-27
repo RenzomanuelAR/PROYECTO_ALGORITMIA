@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -77,7 +79,7 @@ public class Tienda extends JFrame implements ActionListener {
 		        { "Reco Dakota", 849.0, 75.4, 94.5, 66.0, 5 }
 	 };
 	 
-	public static Object[][] datosVentas = {};
+	public static List<Object[]> datosVentas = new ArrayList<Object[]>();
 	
 	// contador de ventas
 	public static int contarVentas = 0; 

@@ -254,8 +254,19 @@ public class Vender extends JFrame implements ActionListener {
 		Tienda.contarVentas = 0;
 		}
 		
-		//Guardar Ventas
-		public static Object[] datoVenta = {};
+		//Guardar registro Ventas
+		Object[] datoVenta = new Object[6];
+		datoVenta[0]=descripcionModelo;
+		datoVenta[1]=precio.toString();
+		datoVenta[2]=cantidad;
+		datoVenta[3]=impCompra;
+		datoVenta[4]=impDescuento;
+		datoVenta[5]=impPagar;
+		datoVenta[6]=obsequio;
+		
+		//Agregar a la Lista de Ventas (Variable Global)
+		Tienda.datosVentas.add(datoVenta);
+		
 		//Imprimir Boleta
 		desBoleta = "BOLETA DE VENTA \n\n";
 		
