@@ -2,6 +2,7 @@ package cibertec;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import cibertec.Tienda;
 
 public class ConsultarCocina extends JFrame implements ActionListener {
 
@@ -32,6 +34,7 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 	private JTextField textQuemadores;
 	private JButton btnCerrar;
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -48,13 +51,6 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 		});
 	}
 	
-	 private static final Object[][] datosCocinas = {
-		        { "Mabe EMP6120PG0", 949.0, 60.0, 91.0, 58.6, 4 },
-		        { "Indurama Parma", 1089.0, 80.0, 94.0, 67.5, 6 },
-		        { "Sole COSOL027", 850.0, 60.0, 90.0, 50.0, 4 },
-		        { "Coldex CX602", 629.0, 61.6, 95.0, 51.5, 5 },
-		        { "Reco Dakota", 849.0, 75.4, 94.5, 66.0, 5 }
-		    };
 
 
 	/**
@@ -102,7 +98,7 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 		
 		comboBoxModelo = new JComboBox();
 		comboBoxModelo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {"MabeEMP6120PG0", "InduramaParma", "SoleCOSOL027", "ColdexCX602", "RecoDakota"}));
+		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {"Mabe EMP6120PG0", "Indurama Parma", "Sole COSOL027", "Coldex CX602", "Reco Dakota"}));
 		
 		comboBoxModelo.addActionListener(e -> {
             String seleccion = (String) comboBoxModelo.getSelectedItem();
@@ -115,26 +111,31 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 		contentPane.add(comboBoxModelo);
 		
 		textPrecio = new JTextField();
+		textPrecio.setEditable(false);
 		textPrecio.setBounds(144, 54, 163, 19);
 		contentPane.add(textPrecio);
 		textPrecio.setColumns(10);
 		
 		textAncho = new JTextField();
+		textAncho.setEditable(false);
 		textAncho.setBounds(144, 77, 163, 19);
 		contentPane.add(textAncho);
 		textAncho.setColumns(10);
 		
 		textAlto = new JTextField();
+		textAlto.setEditable(false);
 		textAlto.setBounds(144, 100, 163, 19);
 		contentPane.add(textAlto);
 		textAlto.setColumns(10);
 		
 		textFondo = new JTextField();
+		textFondo.setEditable(false);
 		textFondo.setBounds(144, 123, 163, 19);
 		contentPane.add(textFondo);
 		textFondo.setColumns(10);
 		
 		textQuemadores = new JTextField();
+		textQuemadores.setEditable(false);
 		textQuemadores.setBounds(144, 151, 163, 19);
 		contentPane.add(textQuemadores);
 		textQuemadores.setColumns(10);
@@ -146,11 +147,11 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 		contentPane.add(btnCerrar);
 		
 		// Mostrar automáticamente los datos de la primera cocina al iniciar la ventana
-        mostrarDatosCocina((String) datosCocinas[0][0]);
+        mostrarDatosCocina((String) Tienda.datosCocinas[0][0]);
 	}
 	
 	private void mostrarDatosCocina(String seleccion) {
-		for (Object[] datos : datosCocinas) {
+		for (Object[] datos : Tienda.datosCocinas) {
             String modelo = (String) datos[0];
             if (modelo.equals(seleccion)) {
                 double precio = (double) datos[1];
