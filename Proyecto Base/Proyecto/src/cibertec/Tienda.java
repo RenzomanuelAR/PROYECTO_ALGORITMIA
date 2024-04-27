@@ -77,9 +77,12 @@ public class Tienda extends JFrame implements ActionListener {
 		        { "Reco Dakota", 849.0, 75.4, 94.5, 66.0, 5 }
 	 };
 	 
+	public static Object[][] datosVentas = {};
 	
-	// Premio sorpresa
-	public static String premioSorpresa = "Un polo";
+	// contador de ventas
+	public static int contarVentas = 0; 
+	public static Double totalVentas = 0.0;
+	public static Double porcentajeVentas = 0.0;
 	private JMenuBar menuBar;
 	private JMenu mnArchivo;
 	private JMenu mnMantenimiento;

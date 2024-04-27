@@ -15,21 +15,25 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
-public class Vender extends JFrame {
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import cibertec.Tienda;
+import javax.swing.ScrollPaneConstants;
+public class Vender extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblmodelo;
 	private JLabel lblprecio;
 	private JLabel lblcantidad;
-	private JComboBox comboBox;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JComboBox cmbModelo;
+	private JTextField textPrecio;
+	private JTextField textCantidad;
 	private JButton btnvender;
 	private JButton btncerrar;
-	private JScrollPane scrollPane;
-	private JTextArea textArea;
+	private JScrollPane scrollPane_1;
+	private JTextArea textResultado;
 
 	/**
 	 * Launch the application.
@@ -72,21 +76,29 @@ public class Vender extends JFrame {
 		lblcantidad.setBounds(10, 73, 64, 20);
 		contentPane.add(lblcantidad);
 		
-		comboBox = new JComboBox();
-		comboBox.setBounds(84, 11, 131, 22);
-		contentPane.add(comboBox);
+		cmbModelo = new JComboBox();
+		cmbModelo.setModel(new DefaultComboBoxModel(new String[] {"Mabe EMP6120PG0", "Indurama Parma", "Sole COSOL027", "Coldex CX602", "Reco Dakota"}));
+		cmbModelo.setBounds(84, 11, 131, 22);
+		contentPane.add(cmbModelo);
 		
-		textField = new JTextField();
-		textField.setBounds(84, 42, 131, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		cmbModelo.addActionListener(e -> {
+            String seleccion = (String) cmbModelo.getSelectedItem();
+            mostrarDatosCocina(seleccion);
+        });
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(84, 73, 131, 20);
-		contentPane.add(textField_1);
+		textPrecio = new JTextField();
+		textPrecio.setEditable(false);
+		textPrecio.setBounds(84, 42, 131, 20);
+		contentPane.add(textPrecio);
+		textPrecio.setColumns(10);
+		
+		textCantidad = new JTextField();
+		textCantidad.setColumns(10);
+		textCantidad.setBounds(84, 73, 131, 20);
+		contentPane.add(textCantidad);
 		
 		btnvender = new JButton("Vender");
+		btnvender.addActionListener(this);
 		btnvender.setBounds(335, 11, 89, 23);
 		contentPane.add(btnvender);
 		
@@ -94,13 +106,16 @@ public class Vender extends JFrame {
 		btncerrar.setBounds(335, 70, 89, 23);
 		contentPane.add(btncerrar);
 		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 110, 414, 140);
-		contentPane.add(scrollPane);
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_1.setBounds(10, 104, 414, 146);
+		contentPane.add(scrollPane_1);
 		
-		textArea = new JTextArea();
-		textArea.setBounds(12, 128, 412, 121);
-		contentPane.add(textArea);
+		textResultado = new JTextArea();
+		scrollPane_1.setViewportView(textResultado);
+		
+		// Mostrar automáticamente los datos de la primera cocina al iniciar la ventana
+        mostrarDatosCocina((String) Tienda.datosCocinas[0][0]);
 	}
 	
 	public void cerrar(){
@@ -122,5 +137,138 @@ public class Vender extends JFrame {
 			JOptionPane.showMessageDialog(null, "Gracias","Gracias",JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		}
+	}
+	
+	//Buscar el Precio de la Cocina seleccionada
+	
+	private void mostrarDatosCocina(String seleccion) {
+		for (Object[] datos : Tienda.datosCocinas) {
+            String modelo = (String) datos[0];
+            if (modelo.equals(seleccion)) {
+                double precio = (double) datos[1];
+                
+
+                textPrecio.setText(String.valueOf(precio));
+                
+            }
+        }
+    }
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnvender) {
+			actionPerformedBtnvender(e);
+		}
+	}
+	protected void actionPerformedBtnvender(ActionEvent e) {
+		//Inicio
+		// Entrada de Datos
+		int modelo, cantidad;
+
+		//declaración de variables internas 
+		Double precio, impCompra, impDescuento, impPagar, portDescuento;
+		String descripcionModelo, obsequio, mensaje, desBoleta;
+
+		//lectura de variables
+		 modelo = cmbModelo.getSelectedIndex();
+		 descripcionModelo = cmbModelo.getSelectedItem().toString();
+		 cantidad = Integer.parseInt(textCantidad.getText());
+
+		//buscar precio (precio0, precio1,precio2,precio3,precio4, son Variables Globales)
+		switch (modelo){
+		case 0:
+		precio = Tienda.precio0;
+		break;
+
+		case 1:
+		precio = Tienda.precio1;
+		break;
+
+
+		case 2:
+		precio = Tienda.precio2;
+		break;
+
+		case 3:
+		precio = Tienda.precio3;
+		break;
+
+		case 4:
+		precio = Tienda.precio4;
+		break;
+
+		default:
+		precio = 0.0;
+
+		}
+
+		//calcular importe compra
+		impCompra = precio * cantidad;
+
+		//Hallar porcentaje Descuento (porcentaje1, porcentaje2,porcentaje3,porcentaje4, son Variables Globales)
+		if (cantidad >= 1 && cantidad <= 5){
+		portDescuento = Tienda.porcentaje1;
+		}
+		else if (cantidad >= 6 && cantidad <= 10){
+		portDescuento = Tienda.porcentaje2;
+		}
+		else if (cantidad >= 11 && cantidad <= 15){
+		portDescuento = Tienda.porcentaje3;
+		}
+		else {
+		portDescuento = Tienda.porcentaje4;
+		}
+
+		//Hallar obsequio (obsequio1, obsequio2,obsequio3, son Variables Globales)
+		if (cantidad == 1){
+		obsequio = Tienda.obsequio1;
+		}
+		else if (cantidad >=2 && cantidad <= 5){
+		obsequio = Tienda.obsequio2;
+		}
+		else {
+		obsequio = Tienda.obsequio3;
+		}
+
+		//Calcular el Importe descuento
+		impDescuento = (impCompra *( portDescuento / 100));
+
+
+		//Calcular Importe a Pagar
+		impPagar = impCompra - impDescuento;
+
+		//Acumular Ventas
+		//totalVentas es una variable global para acumular las ventas
+		Tienda.totalVentas += impPagar;
+
+		//porcentajeVentas es una variable global para calcular la proporcion de ventas sobre la cuota diaria
+		Tienda.porcentajeVentas = ((Tienda.totalVentas * 100) / Tienda.cuotaDiaria);
+
+		//Mostrar mensaje de Ventas (cada 5 ventas)
+		//contarVentas es una variable global
+		Tienda.contarVentas ++ ;
+		if (Tienda.contarVentas == 5 ){
+		mensaje = "Venta Nro." + Tienda.contarVentas + "\n";
+		mensaje = mensaje + "Importe Total general acumulado: S/." + Tienda.totalVentas + "\n";
+		mensaje = mensaje + "Porcentaje de la Cuota diaria: " + Tienda.porcentajeVentas + "% \n";
+		JOptionPane.showMessageDialog(null,mensaje);
+		
+		Tienda.contarVentas = 0;
+		}
+		
+		//Guardar Ventas
+		public static Object[] datoVenta = {};
+		//Imprimir Boleta
+		desBoleta = "BOLETA DE VENTA \n\n";
+		
+		desBoleta = desBoleta + "Modelo \t\t: " + descripcionModelo +"\n";
+		desBoleta = desBoleta + "Precio \t\t: " + precio +"\n";
+		desBoleta = desBoleta + "Cantidad \t\t: " + cantidad +"\n";
+		desBoleta = desBoleta + "Importe compra \t: " + impCompra +"\n";
+		desBoleta = desBoleta + "Importe descuento \t: " + impDescuento +"\n";
+		desBoleta = desBoleta + "Importe pagar \t\t: " + impPagar +"\n";
+		desBoleta = desBoleta + "Obsequio \t\t: " + obsequio;
+
+		textResultado.setText(desBoleta);
+
+		//Fin
 	}
 }
