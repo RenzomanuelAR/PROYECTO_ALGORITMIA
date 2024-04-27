@@ -11,8 +11,10 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class ModificarCocina extends JFrame {
+public class ModificarCocina extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -126,8 +128,17 @@ public class ModificarCocina extends JFrame {
 		contentPane.add(btnCerrar);
 		
 		btnGrabar = new JButton("Grabar");
+		btnGrabar.addActionListener(this);
 		btnGrabar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnGrabar.setBounds(341, 62, 85, 21);
 		contentPane.add(btnGrabar);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnGrabar) {
+			actionPerformedBtnGrabar(e);
+		}
+	}
+	protected void actionPerformedBtnGrabar(ActionEvent e) {
+		
 	}
 }

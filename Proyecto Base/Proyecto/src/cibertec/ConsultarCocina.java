@@ -2,6 +2,7 @@ package cibertec;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import cibertec.Tienda;
 
 public class ConsultarCocina extends JFrame implements ActionListener {
 
@@ -32,6 +34,7 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 	private JTextField textQuemadores;
 	private JButton btnCerrar;
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -47,6 +50,8 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 			}
 		});
 	}
+	
+
 
 	/**
 	 * Create the frame.
@@ -94,30 +99,43 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 		comboBoxModelo = new JComboBox();
 		comboBoxModelo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {"Mabe EMP6120PG0", "Indurama Parma", "Sole COSOL027", "Coldex CX602", "Reco Dakota"}));
+		
+		comboBoxModelo.addActionListener(e -> {
+            String seleccion = (String) comboBoxModelo.getSelectedItem();
+            mostrarDatosCocina(seleccion);
+        });
+		
+		mostrarDatosCocina("MabeEMP6120PG0");
+		
 		comboBoxModelo.setBounds(144, 30, 163, 21);
 		contentPane.add(comboBoxModelo);
 		
 		textPrecio = new JTextField();
+		textPrecio.setEditable(false);
 		textPrecio.setBounds(144, 54, 163, 19);
 		contentPane.add(textPrecio);
 		textPrecio.setColumns(10);
 		
 		textAncho = new JTextField();
+		textAncho.setEditable(false);
 		textAncho.setBounds(144, 77, 163, 19);
 		contentPane.add(textAncho);
 		textAncho.setColumns(10);
 		
 		textAlto = new JTextField();
+		textAlto.setEditable(false);
 		textAlto.setBounds(144, 100, 163, 19);
 		contentPane.add(textAlto);
 		textAlto.setColumns(10);
 		
 		textFondo = new JTextField();
+		textFondo.setEditable(false);
 		textFondo.setBounds(144, 123, 163, 19);
 		contentPane.add(textFondo);
 		textFondo.setColumns(10);
 		
 		textQuemadores = new JTextField();
+		textQuemadores.setEditable(false);
 		textQuemadores.setBounds(144, 151, 163, 19);
 		contentPane.add(textQuemadores);
 		textQuemadores.setColumns(10);
@@ -127,11 +145,40 @@ public class ConsultarCocina extends JFrame implements ActionListener {
 		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnCerrar.setBounds(326, 33, 85, 21);
 		contentPane.add(btnCerrar);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		
+		// Mostrar automáticamente los datos de la primera cocina al iniciar la ventana
+        mostrarDatosCocina((String) Tienda.datosCocinas[0][0]);
 	}
+	
+	private void mostrarDatosCocina(String seleccion) {
+		for (Object[] datos : Tienda.datosCocinas) {
+            String modelo = (String) datos[0];
+            if (modelo.equals(seleccion)) {
+                double precio = (double) datos[1];
+                double ancho = (double) datos[2];
+                double alto = (double) datos[3];
+                double fondo = (double) datos[4];
+                int quemadores = (int) datos[5];
+
+                textPrecio.setText(String.valueOf(precio));
+                textAncho.setText(String.valueOf(ancho));
+                textAlto.setText(String.valueOf(alto));
+                textFondo.setText(String.valueOf(fondo));
+                textQuemadores.setText(String.valueOf(quemadores));
+                break;
+            }
+        }
+    }
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent e)   {
+        if (e.getSource() == btnCerrar) {
+            dispose();
+        } else if (e.getSource() == comboBoxModelo) {
+            String seleccion = (String) comboBoxModelo.getSelectedItem();
+            mostrarDatosCocina(seleccion);
+        }
+    }
+	
 }
