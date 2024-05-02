@@ -255,7 +255,7 @@ public class Vender extends JFrame implements ActionListener {
 		}
 		
 		//Guardar registro Ventas
-		Object[] datoVenta = new Object[6];
+		Object[] datoVenta = new Object[7];
 		datoVenta[0]=descripcionModelo;
 		datoVenta[1]=precio.toString();
 		datoVenta[2]=cantidad;
