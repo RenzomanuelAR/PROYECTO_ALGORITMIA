@@ -172,61 +172,17 @@ public class Vender extends JFrame implements ActionListener {
 		 descripcionModelo = cmbModelo.getSelectedItem().toString();
 		 cantidad = Integer.parseInt(textCantidad.getText());
 
-		//buscar precio (precio0, precio1,precio2,precio3,precio4, son Variables Globales)
-		switch (modelo){
-		case 0:
-		precio = Tienda.precio0;
-		break;
-
-		case 1:
-		precio = Tienda.precio1;
-		break;
-
-
-		case 2:
-		precio = Tienda.precio2;
-		break;
-
-		case 3:
-		precio = Tienda.precio3;
-		break;
-
-		case 4:
-		precio = Tienda.precio4;
-		break;
-
-		default:
-		precio = 0.0;
-
-		}
+		//Utilizando el Metodo buscarPrecio
+		 precio = buscarPrecio(modelo);
 
 		//calcular importe compra
 		impCompra = precio * cantidad;
 
-		//Hallar porcentaje Descuento (porcentaje1, porcentaje2,porcentaje3,porcentaje4, son Variables Globales)
-		if (cantidad >= 1 && cantidad <= 5){
-		portDescuento = Tienda.porcentaje1;
-		}
-		else if (cantidad >= 6 && cantidad <= 10){
-		portDescuento = Tienda.porcentaje2;
-		}
-		else if (cantidad >= 11 && cantidad <= 15){
-		portDescuento = Tienda.porcentaje3;
-		}
-		else {
-		portDescuento = Tienda.porcentaje4;
-		}
+		//Ulitizando el Metodod buscarPorcentajeDescuento
+		portDescuento = buscarPorcentajeDescuento(cantidad);
 
-		//Hallar obsequio (obsequio1, obsequio2,obsequio3, son Variables Globales)
-		if (cantidad == 1){
-		obsequio = Tienda.obsequio1;
-		}
-		else if (cantidad >=2 && cantidad <= 5){
-		obsequio = Tienda.obsequio2;
-		}
-		else {
-		obsequio = Tienda.obsequio3;
-		}
+		//Utilizando el Metodo  buscarObsequio 
+		obsequio = buscarObsequio(cantidad);
 
 		//Calcular el Importe descuento
 		impDescuento = (impCompra *( portDescuento / 100));
@@ -243,30 +199,123 @@ public class Vender extends JFrame implements ActionListener {
 		Tienda.porcentajeVentas = ((Tienda.totalVentas * 100) / Tienda.cuotaDiaria);
 
 		//Mostrar mensaje de Ventas (cada 5 ventas)
-		//contarVentas es una variable global
-		Tienda.contarVentas ++ ;
-		if (Tienda.contarVentas == 5 ){
-		mensaje = "Venta Nro." + Tienda.contarVentas + "\n";
-		mensaje = mensaje + "Importe Total general acumulado: S/." + Tienda.totalVentas + "\n";
-		mensaje = mensaje + "Porcentaje de la Cuota diaria: " + Tienda.porcentajeVentas + "% \n";
-		JOptionPane.showMessageDialog(null,mensaje);
-		
-		Tienda.contarVentas = 0;
-		}
+		mostraAlertaCantidadVentas();
 		
 		//Guardar registro Ventas
-		Object[] datoVenta = new Object[7];
-		datoVenta[0]=descripcionModelo;
-		datoVenta[1]=precio.toString();
-		datoVenta[2]=cantidad;
-		datoVenta[3]=impCompra;
-		datoVenta[4]=impDescuento;
-		datoVenta[5]=impPagar;
-		datoVenta[6]=obsequio;
+		guardarVenta(descripcionModelo, precio, cantidad, impCompra, impDescuento, impPagar, obsequio);
 		
-		//Agregar a la Lista de Ventas (Variable Global)
-		Tienda.datosVentas.add(datoVenta);
 		
+		//Imprimir Boleta
+		imprimirBoleta(descripcionModelo, precio, cantidad, impCompra, impDescuento, impPagar, obsequio);
+
+		//Fin
+	}
+	
+	// Metodo para Buscar el Precio
+	Double buscarPrecio(int modeloCocina) {
+		Double precio =0.0;
+		
+		//buscar precio (precio0, precio1,precio2,precio3,precio4, son Variables Globales)
+				switch (modeloCocina){
+				case 0:
+				precio = Tienda.precio0;
+				break;
+
+				case 1:
+				precio = Tienda.precio1;
+				break;
+
+
+				case 2:
+				precio = Tienda.precio2;
+				break;
+
+				case 3:
+				precio = Tienda.precio3;
+				break;
+
+				case 4:
+				precio = Tienda.precio4;
+				break;
+
+				default:
+				precio = 0.0;
+
+				}
+		return precio;
+	}
+	
+	//Metodo para Hallar el Porcentaje de Descuento
+	Double buscarPorcentajeDescuento(int cantidad) {
+		Double portDescuento = 0.0;
+		//Hallar porcentaje Descuento (porcentaje1, porcentaje2,porcentaje3,porcentaje4, son Variables Globales)
+				if (cantidad >= 1 && cantidad <= 5){
+				portDescuento = Tienda.porcentaje1;
+				}
+				else if (cantidad >= 6 && cantidad <= 10){
+				portDescuento = Tienda.porcentaje2;
+				}
+				else if (cantidad >= 11 && cantidad <= 15){
+				portDescuento = Tienda.porcentaje3;
+				}
+				else {
+				portDescuento = Tienda.porcentaje4;
+				}
+		return portDescuento;
+	}
+	
+	//Metodo para Hallar Obsequio
+	String buscarObsequio(int cantidad) {
+		String obsequio = "";
+		
+		//Hallar obsequio (obsequio1, obsequio2,obsequio3, son Variables Globales)
+				if (cantidad == 1){
+				obsequio = Tienda.obsequio1;
+				}
+				else if (cantidad >=2 && cantidad <= 5){
+				obsequio = Tienda.obsequio2;
+				}
+				else {
+				obsequio = Tienda.obsequio3;
+				}
+		return obsequio;
+	}
+	
+	void mostraAlertaCantidadVentas() {
+		String mensaje = "";
+		//Mostrar mensaje de Ventas (cada 5 ventas)
+				//contarVentas es una variable global
+				Tienda.contarVentas ++ ;
+				if (Tienda.contarVentas == 5 ){
+				mensaje = "Venta Nro." + Tienda.contarVentas + "\n";
+				mensaje = mensaje + "Importe Total general acumulado: S/." + Tienda.totalVentas + "\n";
+				mensaje = mensaje + "Porcentaje de la Cuota diaria: " + Tienda.porcentajeVentas + "% \n";
+				JOptionPane.showMessageDialog(null,mensaje);
+				
+				Tienda.contarVentas = 0;
+				}
+		
+	}
+	
+	//Metodo para Guardar Ventas
+	void guardarVenta(String descripcionModelo, Double precio, int cantidad, Double impCompra,Double impDescuento,Double impPagar, String obsequio) {
+		//Guardar registro Ventas
+				Object[] datoVenta = new Object[7];
+				datoVenta[0]=descripcionModelo;
+				datoVenta[1]=precio;
+				datoVenta[2]=cantidad;
+				datoVenta[3]=impCompra;
+				datoVenta[4]=impDescuento;
+				datoVenta[5]=impPagar;
+				datoVenta[6]=obsequio;
+				
+				//Agregar a la Lista de Ventas (Variable Global)
+				Tienda.datosVentas.add(datoVenta);
+	}
+	
+	//Metodo Para Imprimir Boleta
+	void imprimirBoleta(String descripcionModelo, Double precio, int cantidad, Double impCompra,Double impDescuento,Double impPagar, String obsequio) {
+		String desBoleta = "";
 		//Imprimir Boleta
 		desBoleta = "BOLETA DE VENTA \n\n";
 		
@@ -279,7 +328,7 @@ public class Vender extends JFrame implements ActionListener {
 		desBoleta = desBoleta + "Obsequio \t\t: " + obsequio;
 
 		textResultado.setText(desBoleta);
-
-		//Fin
 	}
+
 }
+
