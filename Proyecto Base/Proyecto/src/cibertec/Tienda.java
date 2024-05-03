@@ -83,6 +83,7 @@ public class Tienda extends JFrame implements ActionListener {
 	
 	// contador de ventas
 	public static int contarVentas = 0; 
+	//Acumulador Total Ventas
 	public static Double totalVentas = 0.0;
 	public static Double porcentajeVentas = 0.0;
 	private JMenuBar menuBar;
@@ -102,6 +103,7 @@ public class Tienda extends JFrame implements ActionListener {
 	private JMenu mnAyuda;
 	private JMenuItem mntmAyudaAcerca;
 	private JMenuItem mntmArchSalir;
+	private JMenuItem mntmEjemploReporte;
 
 	/**
 	 * Launch the application.
@@ -170,6 +172,11 @@ public class Tienda extends JFrame implements ActionListener {
 		mntmVentGenerar = new JMenuItem("Generar Reportes");
 		mntmVentGenerar.addActionListener(this);
 		mnVentas.add(mntmVentGenerar);
+		
+		mntmEjemploReporte = new JMenuItem("Ejemplo Reporte");
+		mntmEjemploReporte.addActionListener(this);
+		mnVentas.add(mntmEjemploReporte);
+		
 		
 		mnConfiguracion = new JMenu("Configuración");
 		menuBar.add(mnConfiguracion);
@@ -260,7 +267,10 @@ public class Tienda extends JFrame implements ActionListener {
 			frame.setVisible(true);
         }
  
- 
+        if (e.getSource()==mntmEjemploReporte) {
+        	EjemploReporte frame = new EjemploReporte();
+			frame.setVisible(true);
+        }
  
 	}
 }
