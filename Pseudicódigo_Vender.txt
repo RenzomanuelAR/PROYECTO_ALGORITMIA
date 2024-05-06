@@ -1,0 +1,110 @@
+//Inicio
+// Entrada de Datos
+entero modelo, cantidad
+
+//declaración de variables internas 
+decimal precio, impCompra, impDescuento, impPagar, portDescuento
+cadena descripcionModelo, obsequio, mensaje, desBoleta
+
+//lectura de variables
+leer modelo 
+leer descripcionModelo
+leer cantidad
+
+//buscar precio
+segun (modelo){
+caso 0:
+precio = precio0
+salir
+
+caso 1:
+precio = precio1
+salir
+
+caso 2:
+precio = precio2
+salir
+
+caso 3:
+precio = precio3
+salir
+
+caso 4:
+precio = precio4
+salir
+
+defecto:
+precio = 0
+
+}
+
+//calcular importe compra
+impCompra = precio * cantidad
+
+//Hallar porcentaje Descuento
+si (cantidad >= 1 y cantidad <= 5){
+portDescuento = porcentaje1
+}
+sino si (cantidad >= 6 y cantidad <= 10){
+portDescuento = porcentaje2
+}
+sino si (cantidad >= 11 y cantidad <= 15){
+portDescuento = porcentaje3
+}
+sino {
+portDescuento = porcentaje4
+}
+
+//Hallar obsequio
+si (cantidad == 1){
+obsequio = obsequio1
+}
+sino si (cantidad >=2 y cantidad <= 5){
+obsequio = obsequio2
+}
+sino {
+obsequio = obsequio3
+}
+
+//Calcular el Importe descuento
+impDescuento = (impCompra *( portDescuento / 100))
+
+
+//Calcular Importe a Pagar
+impPagar = impCompra - impDescuento
+
+//Acumular Ventas
+//totalVentas es una variable global para acumular las ventas
+totalVentas = totalVentas + impPagar
+
+//porcentajeVentas es una variable global para calcular la proporcion de ventas sobre la cuota diaria
+porcentajeVentas = ((totalVentas * 100) / cuotaDiaria)
+
+//Mostrar mensaje de Ventas (cada 5 ventas)
+//contarVentas es una variable global
+contarVentas = contarVentas + 1 
+si (contarVentas == 5 ){
+mensaje = "Venta Nro." + contarVentas
+mensaje = mensaje + "Importe Total general acumulado: S/." + totalVentas
+mensaje = mensaje + "Porcentaje de la Cuota diaria: " + porcentajeVentas + "%"
+imprimir mensaje
+contarVentas = 0
+}
+
+//Guardar Boleta
+//datosVentas es una lista de arrays global para guardar ventas
+
+//Imprimir Boleta
+desBoleta = "BOLETA DE VENTA"
+
+desBoleta = desBoleta + "Modelo :" + descripcionModelo
+desBoleta = desBoleta + "Precio :" + precio
+desBoleta = desBoleta + "Cantidad :" + cantidad
+desBoleta = desBoleta + "Importe compra :" + impCompra
+desBoleta = desBoleta + "Importe descuento :" + impDescuento
+desBoleta = desBoleta + "Importe pagar :" + impPagar
+desBoleta = desBoleta + "Obsequio :" + obsequio
+
+Imprimir desBoleta
+
+//Fin

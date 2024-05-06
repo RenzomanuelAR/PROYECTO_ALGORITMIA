@@ -184,7 +184,7 @@ public class Vender extends JFrame implements ActionListener {
 
 		if (textCantidad.getText().equals("0") || textCantidad.getText().equals("")) {
 
-			JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad válida.");
+			JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad válida.", "Mensaje de Vadilación",  JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
@@ -194,7 +194,7 @@ public class Vender extends JFrame implements ActionListener {
 				Integer.parseInt(textCantidad.getText());
 			}
 		} catch (NumberFormatException nfe) {
-			JOptionPane.showMessageDialog(null, "Debe ingresar un número entero.");
+			JOptionPane.showMessageDialog(null, "Debe ingresar un número entero.", "Mensaje de Vadilación",  JOptionPane.ERROR_MESSAGE);
 			textCantidad.setText("");
 			textCantidad.grabFocus();
 			return;
@@ -203,7 +203,7 @@ public class Vender extends JFrame implements ActionListener {
 		cantidad = Integer.parseInt(textCantidad.getText());
 
 		// Utilizando el Metodo buscarPrecio
-		precio = buscarPrecio(modelo);
+		precio = buscarPrecio();
 
 		// calcular importe compra
 		impCompra = precio * cantidad;
@@ -245,36 +245,10 @@ public class Vender extends JFrame implements ActionListener {
 	}
 
 	// Metodo para Buscar el Precio
-	Double buscarPrecio(int modeloCocina) {
-		Double precio = 0.0;
+	Double buscarPrecio() {
+		Double precio = Double.parseDouble(textPrecio.getText());
 
-		// buscar precio (precio0, precio1,precio2,precio3,precio4, son Variables
-		// Globales)
-		switch (modeloCocina) {
-		case 0:
-			precio = Tienda.precio0;
-			break;
-
-		case 1:
-			precio = Tienda.precio1;
-			break;
-
-		case 2:
-			precio = Tienda.precio2;
-			break;
-
-		case 3:
-			precio = Tienda.precio3;
-			break;
-
-		case 4:
-			precio = Tienda.precio4;
-			break;
-
-		default:
-			precio = 0.0;
-
-		}
+		
 		return precio;
 	}
 
