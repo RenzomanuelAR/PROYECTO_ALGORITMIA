@@ -1,110 +1,153 @@
 //Inicio
-// Entrada de Datos
-entero modelo, cantidad
+		// Entrada de Datos
+		entero modelo, cantidad
 
-//declaración de variables internas 
-decimal precio, impCompra, impDescuento, impPagar, portDescuento
-cadena descripcionModelo, obsequio, mensaje, desBoleta
+		//declaración de variables internas 
+		decimal precio, impCompra, impDescuento, impPagar, portDescuento
+		cadena descripcionModelo, obsequio, mensaje, desBoleta
 
-//lectura de variables
-leer modelo 
-leer descripcionModelo
-leer cantidad
-
-//buscar precio
-segun (modelo){
-caso 0:
-precio = precio0
-salir
-
-caso 1:
-precio = precio1
-salir
-
-caso 2:
-precio = precio2
-salir
-
-caso 3:
-precio = precio3
-salir
-
-caso 4:
-precio = precio4
-salir
-
-defecto:
-precio = 0
-
-}
-
-//calcular importe compra
-impCompra = precio * cantidad
-
-//Hallar porcentaje Descuento
-si (cantidad >= 1 y cantidad <= 5){
-portDescuento = porcentaje1
-}
-sino si (cantidad >= 6 y cantidad <= 10){
-portDescuento = porcentaje2
-}
-sino si (cantidad >= 11 y cantidad <= 15){
-portDescuento = porcentaje3
-}
-sino {
-portDescuento = porcentaje4
-}
-
-//Hallar obsequio
-si (cantidad == 1){
-obsequio = obsequio1
-}
-sino si (cantidad >=2 y cantidad <= 5){
-obsequio = obsequio2
-}
-sino {
-obsequio = obsequio3
-}
-
-//Calcular el Importe descuento
-impDescuento = (impCompra *( portDescuento / 100))
+		//lectura de variables
+		leer modelo 
+		leer descripcionModelo
+		leer precio
+		leer cantidad
 
 
-//Calcular Importe a Pagar
-impPagar = impCompra - impDescuento
+		// calcular importe compra
+		impCompra = precio * cantidad
 
-//Acumular Ventas
-//totalVentas es una variable global para acumular las ventas
-totalVentas = totalVentas + impPagar
+		// Ulitizando el Metodod buscarPorcentajeDescuento
+		portDescuento = buscarPorcentajeDescuento(cantidad)
 
-//porcentajeVentas es una variable global para calcular la proporcion de ventas sobre la cuota diaria
-porcentajeVentas = ((totalVentas * 100) / cuotaDiaria)
+		// Utilizando el Metodo buscarObsequio
+		obsequio = buscarObsequio(cantidad)
 
-//Mostrar mensaje de Ventas (cada 5 ventas)
-//contarVentas es una variable global
-contarVentas = contarVentas + 1 
-si (contarVentas == 5 ){
-mensaje = "Venta Nro." + contarVentas
-mensaje = mensaje + "Importe Total general acumulado: S/." + totalVentas
-mensaje = mensaje + "Porcentaje de la Cuota diaria: " + porcentajeVentas + "%"
-imprimir mensaje
-contarVentas = 0
-}
+		// Calcular el Importe descuento
+		impDescuento = (impCompra * (portDescuento / 100))
 
-//Guardar Boleta
-//datosVentas es una lista de arrays global para guardar ventas
+		// Calcular Importe a Pagar
+		impPagar = impCompra - impDescuento
 
-//Imprimir Boleta
-desBoleta = "BOLETA DE VENTA"
+		// Acumular Ventas
+		// totalVentas es una variable global para acumular las ventas
+		Tienda.totalVentas += impPagar
 
-desBoleta = desBoleta + "Modelo :" + descripcionModelo
-desBoleta = desBoleta + "Precio :" + precio
-desBoleta = desBoleta + "Cantidad :" + cantidad
-desBoleta = desBoleta + "Importe compra :" + impCompra
-desBoleta = desBoleta + "Importe descuento :" + impDescuento
-desBoleta = desBoleta + "Importe pagar :" + impPagar
-desBoleta = desBoleta + "Obsequio :" + obsequio
+		//Acumular Ventas
+		//totalVentas es una variable global para acumular las ventas
+		totalVentas = totalVentas + impPagar
 
-Imprimir desBoleta
+		//porcentajeVentas es una variable global para calcular la proporcion de ventas sobre la cuota diaria
+		porcentajeVentas = ((totalVentas * 100) / cuotaDiaria)
+
+
+		// Mostrar mensaje de Ventas (cada 5 ventas)
+		mostraAlertaCantidadVentas
+
+		// Guardar registro Ventas
+		guardarVenta(descripcionModelo, precio, cantidad, impCompra, impDescuento, impPagar, obsequio)
+
+		// Imprimir Boleta
+		imprimirBoleta(descripcionModelo, precio, cantidad, impCompra, impDescuento, impPagar, obsequio)
+
+
+//Fin
+
+//Inicio
+	// Metodo para Hallar el Porcentaje de Descuento
+	Decimal buscarPorcentajeDescuento(Entero cantidad) {
+		Decimal portDescuento = 0.0
+		//Hallar porcentaje Descuento
+		si (cantidad >= 1 y cantidad <= 5){
+		portDescuento = porcentaje1
+		}
+		sino si (cantidad >= 6 y cantidad <= 10){
+		portDescuento = porcentaje2
+		}
+		sino si (cantidad >= 11 y cantidad <= 15){
+		portDescuento = porcentaje3
+		}
+		sino {
+		portDescuento = porcentaje4
+		}
+		
+		Retornar portDescuento
+	}
+//Fin
+
+//Inicio
+// Metodo para Hallar Obsequio
+	Cadena buscarObsequio(Entero cantidad) {
+		Cadena obsequio = ""
+
+		// Hallar obsequio (obsequio1, obsequio2,obsequio3, son Variables Globales)
+		si (cantidad == 1) {
+			obsequio = Tienda.obsequio1
+		} sino si (cantidad >= 2 && cantidad <= 5) {
+			obsequio = Tienda.obsequio2
+		} sino {
+			obsequio = Tienda.obsequio3
+		}
+		Retornar obsequio
+	}
+
+//Fin
+
+//Inicio
+ mostraAlertaCantidadVentas() {
+		Cadena mensaje = ""
+		// Mostrar mensaje de Ventas (cada 5 ventas)
+		// contarVentas es una variable global
+		Tienda.contarVentas++
+		si (Tienda.contarVentas == 5) {
+			mensaje = "Venta Nro." + Tienda.contarVentas
+			mensaje = mensaje + "Importe Total general acumulado: S/." + Tienda.totalVentas
+			mensaje = mensaje + "Porcentaje de la Cuota diaria: " + Tienda.porcentajeVentas + "%"
+			Mostrar Mensaje
+
+			Tienda.contarVentas = 0
+		}
+
+	}
+
+//Fin
+
+//Inicio
+// Metodo para Guardar Ventas
+	 guardarVenta(Cadena descripcionModelo, Decimal precio, Entero cantidad, Decimal impCompra, Decimal impDescuento,
+			Decimal impPagar, Cadena obsequio) {
+		// Guardar registro Ventas
+		Crear Objeto datoVenta
+		datoVenta[0] = descripcionModelo
+		datoVenta[1] = precio
+		datoVenta[2] = cantidad
+		datoVenta[3] = impCompra
+		datoVenta[4] = impDescuento
+		datoVenta[5] = impPagar
+		datoVenta[6] = obsequio
+
+		// Agregar a la Lista de Ventas (Variable Global)
+		Tienda.datosVentas.agregar(datoVenta)
+	}
+
+//Fin
+
+//Inicio
+// Metodo Para Imprimir Boleta
+	 imprimirBoleta(Cadena descripcionModelo, Decimal precio, Entero cantidad, Decimal impCompra, Decimal impDescuento,
+			Decimal impPagar, Cadena obsequio) {
+		Cadena desBoleta = ""
+		// Imprimir Boleta
+		desBoleta = "BOLETA DE VENTA "
+
+		desBoleta = desBoleta + "Modelo : " + descripcionModelo
+		desBoleta = desBoleta + "Precio : " + precio 
+		desBoleta = desBoleta + "Cantidad : " + cantidad 
+		desBoleta = desBoleta + "Importe compra : " + impCompra
+		desBoleta = desBoleta + "Importe descuento : " + impDescuento
+		desBoleta = desBoleta + "Importe pagar: " + impPagar
+		desBoleta = desBoleta + "Obsequio : " + obsequio
+
+		Imprimir desBoleta
+	}
 
 //Fin
