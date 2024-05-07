@@ -150,7 +150,7 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 				txtcanopt = "menos que la cantidad óptima";
 			} else {
 				canvenopt = (canunven - Tienda.cantidadOptima);
-				txtcanopt = "igual la cantidad óptima";
+				txtcanopt = "igual a la cantidad óptima";
 			}
 			reportveoptm += "Modelo                          : " + model + "\n";
 			reportveoptm += "Cantidad de unidades vendidas   : " + canunven + "(" + canvenopt + " " + txtcanopt + ")" + "\n";
