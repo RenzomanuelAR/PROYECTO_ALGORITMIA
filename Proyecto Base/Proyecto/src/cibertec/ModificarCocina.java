@@ -29,8 +29,18 @@ public class ModificarCocina extends JFrame implements ActionListener {
 	private JTextField textAlto;
 	private JTextField textFondo;
 	private JTextField textQuemadores;
-	private JComboBox comboBox;
+	private JComboBox comboBoxModelo;
 	private JButton btnGrabar;
+	private JButton btnCerrar;
+	
+	public static Object[][] datosCocinas = {
+	        { "Mabe EMP6120PG0", 949.0, 60.0, 91.0, 58.6, 4 },
+	        { "Indurama Parma", 1089.0, 80.0, 94.0, 67.5, 6 },
+	        { "Sole COSOL027", 850.0, 60.0, 90.0, 50.0, 4 },
+	        { "Coldex CX602", 629.0, 61.6, 95.0, 51.5, 5 },
+	        { "Reco Dakota", 849.0, 75.4, 94.5, 66.0, 5 }
+ };
+	
 
 	/**
 	 * Launch the application.
@@ -116,13 +126,22 @@ public class ModificarCocina extends JFrame implements ActionListener {
 		contentPane.add(textQuemadores);
 		textQuemadores.setColumns(10);
 		
-		comboBox = new JComboBox();
-		comboBox.setFont(new Font("Tahoma", Font.BOLD, 13));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Mabe EMP6120PG0", "Indurama Parma", "Sole COSOL027", "Coldex CX602", "", "Reco Dakota"}));
-		comboBox.setBounds(156, 39, 154, 21);
-		contentPane.add(comboBox);
+		comboBoxModelo = new JComboBox();
+		comboBoxModelo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {"Mabe EMP6120PG0", "Indurama Parma", "Sole COSOL027", "Coldex CX602", "Reco Dakota"}));
 		
-		JButton btnCerrar = new JButton("Cerrar");
+		comboBoxModelo.addActionListener(e -> {
+            String seleccion = (String) comboBoxModelo.getSelectedItem();
+            mostrarDatosCocina(seleccion);
+        });
+		
+		mostrarDatosCocina("MabeEMP6120PG0");
+		
+		comboBoxModelo.setBounds(156, 39, 154, 21);
+		contentPane.add(comboBoxModelo);
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
 		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnCerrar.setBounds(341, 39, 85, 21);
 		contentPane.add(btnCerrar);
@@ -132,13 +151,63 @@ public class ModificarCocina extends JFrame implements ActionListener {
 		btnGrabar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnGrabar.setBounds(341, 62, 85, 21);
 		contentPane.add(btnGrabar);
+		
+		// Mostrar automáticamente los datos de la primera cocina al iniciar la ventana
+        mostrarDatosCocina((String) Tienda.datosCocinas[0][0]);
+        
 	}
+	
+    private void mostrarDatosCocina(String modeloSeleccionado) {
+        // Buscar el modelo seleccionado en los datos de cocinas
+        for (Object[] cocina : datosCocinas) {
+            if (cocina[0].equals(modeloSeleccionado)) {
+                // Mostrar los datos en los campos de texto
+                textPrecio.setText(String.valueOf(cocina[1]));
+                textAncho.setText(String.valueOf(cocina[2]));
+                textAlto.setText(String.valueOf(cocina[3]));
+                textFondo.setText(String.valueOf(cocina[4]));
+                textQuemadores.setText(String.valueOf(cocina[5]));
+                break;
+            }
+        }
+    }
+    
+    
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnGrabar) {
+		if (e.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(e);
+		}
+		if (e.getSource() == btnGrabar) {		
 			actionPerformedBtnGrabar(e);
+			dispose ();
 		}
 	}
 	protected void actionPerformedBtnGrabar(ActionEvent e) {
 		
+		//Obtener el modelo seleccionado
+		String modeloSeleccionado = (String) comboBoxModelo.getSelectedItem();
+		
+		// Buscar la cocina correspondiente en los datosCocinas
+	    for (Object[] cocina : datosCocinas) {
+	        if (cocina[0].equals(modeloSeleccionado)) {
+	            // Actualizar los datos con los valores de los campos de texto
+	            cocina[1] = Double.parseDouble(textPrecio.getText());
+	            cocina[2] = Double.parseDouble(textAncho.getText());
+	            cocina[3] = Double.parseDouble(textAlto.getText());
+	            cocina[4] = Double.parseDouble(textFondo.getText());
+	            cocina[5] = Integer.parseInt(textQuemadores.getText());
+	            break;
+	        }
+	    }
+	    
+	    // Mostrar un mensaje indicando que los cambios se han guardado
+	    System.out.println("Cambios guardados para " + modeloSeleccionado);
+		
+	}
+	protected void actionPerformedBtnCerrar(ActionEvent e) {
+		
+		 //Cierra la ventana 
+		
+		 dispose();
 	}
 }
