@@ -28,6 +28,15 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 	private JButton btnCerrar;
 	private JComboBox cboReporte;
 	private JTextArea txtS;
+	
+    public static Object[][] datosReportes = {
+	        { "Mabe EMP6120PG0", 0, 0, 0 },
+	        { "Indurama Parma", 0, 0, 0 },
+	        { "Sole COSOL027", 0, 0, 0 },
+	        { "Coldex CX602", 0, 0, 0  },
+	        { "Reco Dakota",0, 0, 0 }
+    };
+    
 	//Declaracion de variables globales
 	String reportVenta, reportveoptm, txtcanopt, model;
 	Integer canunven, canvenopt;
@@ -114,32 +123,61 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 	}
 	//Metodo de reporte de ventas
 	void reportedeVentas() {
-		    reportVenta = "VENTAS POR MODELO :\n\n";
-		//Utilizar datos de las ventas guardadas   
-		for (Object[] fila : listaVentas) {
-			//Asignar una variable a respectiva fila de datos
-			model = String.valueOf(fila[0].toString());
-			canunven = Integer.parseInt(fila[2].toString());
-			imptoven = Double.parseDouble(fila[3].toString());
-			//Calcular aporte a la cuota diaria
-			aportcuodiaria = imptoven / 5 / 100;
+		 reportVenta = "VENTAS POR MODELO :\n\n";
+		 int cantidadCocinas = datosReportes.length;
+		 
+		 for(Object[] filaReporte : datosReportes) {
+			 filaReporte[1] = 0 ;
+			 filaReporte[2] = 0 ;
+			 filaReporte[3] = 0 ;
+				//recorrer cada fila de ventas
+				for (Object[] filaVenta : listaVentas) {
+					 if(filaReporte[0].equals(filaVenta[0])) {
+						 filaReporte[1] = Integer.parseInt(filaReporte[1].toString()) + Integer.parseInt(filaVenta[2].toString()) ;
+						 filaReporte[2] = Double.parseDouble(filaReporte[1].toString()) + Double.parseDouble(filaVenta[5].toString()) ;
+						 filaReporte[3] = Double.parseDouble(filaReporte[2].toString()) / cantidadCocinas /100 ;
+					 }
+					
+				}
+				
+		 }
+			
+		//Imprimir acumulado de ventas por cada cocina
+		for (Object[] filaReporte : datosReportes) {
 			//Guardar los datos respectivamente
-			reportVenta += "Modelo                            : " + model + "\n";
-			reportVenta += "Cantidad de unidades vendidas     : " + canunven + "\n";
-			reportVenta += "Importe total vendido             : " + "S/." + imptoven + "\n";
-			reportVenta += "Aporte a la cuota diaria          : " + aportcuodiaria + "%" + "\n";
-		
+			reportVenta += "Modelo                            : " + filaReporte[0] + "\n";
+			reportVenta += "Cantidad de unidades vendidas     : " + filaReporte[1] + "\n";
+			reportVenta += "Importe total vendido             : " + "S/." + filaReporte[2] + "\n";
+			reportVenta += "Aporte a la cuota diaria          : " + filaReporte[3] + "%" + "\n";
 			reportVenta += "\n";
 			
 		}
 	}
+	
+	
 	//Metodo de ventas en relacion a la venta optima
 	void reporteVentaOptima() {
-		    reportveoptm = "VENTAS EN RELACIÓN A LA VENTA ÓPTIMA :\n\n";
+		 
+		 for(Object[] filaReporte : datosReportes) {
+			 filaReporte[1] = 0 ;
+			 filaReporte[2] = 0 ;
+			 filaReporte[3] = 0 ;
+				//recorrer cada fila de ventas
+				for (Object[] filaVenta : listaVentas) {
+					 if(filaReporte[0].equals(filaVenta[0])) {
+						 filaReporte[1] = Integer.parseInt(filaReporte[1].toString()) + Integer.parseInt(filaVenta[2].toString()) ;
+					 }
+					
+				}
+				
+		 }		
+		
+		reportveoptm = "VENTAS EN RELACIÓN A LA VENTA ÓPTIMA :\n\n";
 			//Utilizar datos de las ventas guardadas  
-		for (Object[] fila : listaVentas) {
+		for (Object[] fila : datosReportes) {
+			String cantidadStr="";
 			//Asignar una variable a respectiva fila de datos
-			canunven = Integer.parseInt(fila[2].toString());
+			canunven = Integer.parseInt(fila[1].toString());
 			model = String.valueOf(fila[0].toString());
             //Calcular venta en relacion a la venta optima
 			if (canunven > Tienda.cantidadOptima) {
@@ -152,8 +190,14 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 				canvenopt = (canunven - Tienda.cantidadOptima);
 				txtcanopt = "igual a la cantidad óptima";
 			}
+			
+			if(canvenopt==0) {
+				cantidadStr="";
+			}else {
+				cantidadStr = canvenopt.toString();
+			}
 			reportveoptm += "Modelo                          : " + model + "\n";
-			reportveoptm += "Cantidad de unidades vendidas   : " + canunven + "(" + canvenopt + " " + txtcanopt + ")" + "\n";
+			reportveoptm += "Cantidad de unidades vendidas   : " + canunven + "(" + cantidadStr + " " + txtcanopt + ")" + "\n";
 			reportveoptm += "\n";
 		}
 	}
@@ -164,67 +208,96 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			txtS.setText("");
 			imprimir(reportVenta);
 			imprimir("CANTIDAD DE VENTAS  : " + Tienda.contarVentas  + "\n");
-			return;
+			break;
 		case 1:
 			txtS.setText("");
 			imprimir(reportveoptm);
-			return;
+			break;
 		case 2:
+			double promedioPrecio =0,sumaPrecios=0;
+			int cantidadCocinas = Tienda.datosCocinas.length;
+			
+			 for(Object[] filaCocina : Tienda.datosCocinas) {
+				sumaPrecios += Double.parseDouble(filaCocina[1].toString());
+			 }		
+			
+			promedioPrecio = sumaPrecios / cantidadCocinas;
+			 
 			txtS.setText("");
-			imprimir(" PRECIOS EN RELACIÓN AL PRECIO PROMEDIO  :");
+			imprimir(" PRECIOS EN RELACIÓN AL PRECIO PROMEDIO  : ");
+			imprimir(" Precio promnedio de una Cocina  : S/. " + promedioPrecio);
 			imprimir("");
 			for(Object[] fila : Tienda.datosCocinas) {
+				String descripcion="";
+				if(Double.parseDouble(fila[1].toString()) > promedioPrecio) {
+					descripcion = " (Mayor al promedio)";
+				}else if(Double.parseDouble(fila[1].toString()) < promedioPrecio) {
+					descripcion = " (Menor al promedio)";
+				}else {
+					descripcion = " (Igual al promedio)";
+				}				
 				imprimir("");
 				imprimir(" Modelo     : " + fila[0]);
-				imprimir(" Precio     : " + "S/ ." + " " + fila[1] + "(Mayor al promedio)");
+				imprimir(" Precio     : " + "S/ ." + " " + fila[1] + descripcion);
 				
 			}
-//			imprimir(" Modelo     : " + Tienda.datosVentas);
-//			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio0 + "(Mayor al promedio)");
-//			imprimir("");
-//			imprimir(" Modelo     : " + Tienda.modelo1);
-//			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio1 + "(Mayor al promedio)");
-//			imprimir("");
-//			imprimir(" Modelo     : " + Tienda.modelo2);
-//			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio2 + "(Menor al promedio)");
-//			imprimir("");
-//			imprimir(" Modelo     : " + Tienda.modelo3);
-//			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio3 + "(Menor al promedio)");
-//			imprimir("");
-//			imprimir(" Modelo     : " + Tienda.modelo4);
-//			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio4 + "(Menor al promedio)");
-			return;
+			break;
 		default:
 			txtS.setText("");
 			imprimir(" PROMEDIOS, MENORES Y MAYORES  : ");
+			
+			//Inicio Promedio, mayor, menor del Precio
 			double precioPromedio = 0, precioMenor = 0, precioMayor = 0, sumaPrecio = 0;
+			double precioActual=0;
+			
+			int flat=0;
 			for(Object[] fila : Tienda.datosCocinas) {
-				sumaPrecio += Double.parseDouble(fila[1].toString());
-				if (Double.parseDouble(fila[1].toString()) > precioMenor) {
-					
+				precioActual = Double.parseDouble(fila[1].toString());
+				sumaPrecio += precioActual;
+				if(flat == 0) {
+					precioMenor = precioActual;
+					precioMayor = precioActual;
+					flat = 1;
+				}
+				
+				//Hallar el precio menor
+				if (precioActual < precioMenor) {
+					precioMenor = precioActual;
+				}
+				
+				//Hallar el precio mayor
+				if (precioActual > precioMayor) {
+					precioMayor = precioActual;
 				}
 			}
 			precioPromedio = sumaPrecio / 5;
+			
 			imprimir("");
 			imprimir(" Precio promedio               : " + "S/." + precioPromedio);
-			imprimir(" Precio menor                  : " + "S/." + Tienda.precio3);
-			imprimir(" Precio mayor                  : " + "S/." + Tienda.precio1);
-			imprimir("");
-			imprimir(" Ancho promedio                : " + Tienda.ancho4);
-			imprimir(" Ancho menor                   : " + Tienda.ancho0);
-			imprimir(" Ancho mayor                   : " + Tienda.ancho1);
-			imprimir("");
-			imprimir(" Fondo promedio                : " + Tienda.fondo4);
-			imprimir(" Fondo menor                   : " + Tienda.fondo2);
-			imprimir(" Fondo mayor                   : " + Tienda.fondo1);
-			imprimir("");
-			imprimir(" Alto promedio                 : " + Tienda.alto4);
-			imprimir(" Alto menor                    : " + Tienda.alto2);
-			imprimir(" Alto mayor                    : " + Tienda.alto3);
-			imprimir("");
-			imprimir(" Quemadores promedio           : " + Tienda.quemadores3);
-			imprimir(" Quemadores menor              : " + Tienda.quemadores0);
-			imprimir(" Quemadores mayor              : " + Tienda.quemadores1);
+			imprimir(" Precio menor                  : " + "S/." + precioMenor);
+			imprimir(" Precio mayor                  : " + "S/." + precioMayor);
+			//fin
+			
+//			imprimir("");
+//			imprimir(" Ancho promedio                : " + Tienda.ancho4);
+//			imprimir(" Ancho menor                   : " + Tienda.ancho0);
+//			imprimir(" Ancho mayor                   : " + Tienda.ancho1);
+			
+			
+//			imprimir("");
+//			imprimir(" Fondo promedio                : " + Tienda.fondo4);
+//			imprimir(" Fondo menor                   : " + Tienda.fondo2);
+//			imprimir(" Fondo mayor                   : " + Tienda.fondo1);
+//			imprimir("");
+			
+//			imprimir(" Alto promedio                 : " + Tienda.alto4);
+//			imprimir(" Alto menor                    : " + Tienda.alto2);
+//			imprimir(" Alto mayor                    : " + Tienda.alto3);
+//			imprimir("");
+			
+//			imprimir(" Quemadores promedio           : " + Tienda.quemadores3);
+//			imprimir(" Quemadores menor              : " + Tienda.quemadores0);
+//			imprimir(" Quemadores mayor              : " + Tienda.quemadores1);
 		}
 	}
 	void imprimir(String cad) {
