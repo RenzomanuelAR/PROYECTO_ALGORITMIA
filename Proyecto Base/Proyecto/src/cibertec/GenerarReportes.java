@@ -173,26 +173,40 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			txtS.setText("");
 			imprimir(" PRECIOS EN RELACIÓN AL PRECIO PROMEDIO  :");
 			imprimir("");
-			imprimir(" Modelo     : " + Tienda.modelo0);
-			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio0 + "(Mayor al promedio)");
-			imprimir("");
-			imprimir(" Modelo     : " + Tienda.modelo1);
-			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio1 + "(Mayor al promedio)");
-			imprimir("");
-			imprimir(" Modelo     : " + Tienda.modelo2);
-			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio2 + "(Menor al promedio)");
-			imprimir("");
-			imprimir(" Modelo     : " + Tienda.modelo3);
-			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio3 + "(Menor al promedio)");
-			imprimir("");
-			imprimir(" Modelo     : " + Tienda.modelo4);
-			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio4 + "(Menor al promedio)");
+			for(Object[] fila : Tienda.datosCocinas) {
+				imprimir("");
+				imprimir(" Modelo     : " + fila[0]);
+				imprimir(" Precio     : " + "S/ ." + " " + fila[1] + "(Mayor al promedio)");
+				
+			}
+//			imprimir(" Modelo     : " + Tienda.datosVentas);
+//			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio0 + "(Mayor al promedio)");
+//			imprimir("");
+//			imprimir(" Modelo     : " + Tienda.modelo1);
+//			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio1 + "(Mayor al promedio)");
+//			imprimir("");
+//			imprimir(" Modelo     : " + Tienda.modelo2);
+//			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio2 + "(Menor al promedio)");
+//			imprimir("");
+//			imprimir(" Modelo     : " + Tienda.modelo3);
+//			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio3 + "(Menor al promedio)");
+//			imprimir("");
+//			imprimir(" Modelo     : " + Tienda.modelo4);
+//			imprimir(" Precio     : " + "S/ ." + " " + Tienda.precio4 + "(Menor al promedio)");
 			return;
 		default:
 			txtS.setText("");
 			imprimir(" PROMEDIOS, MENORES Y MAYORES  : ");
+			double precioPromedio = 0, precioMenor = 0, precioMayor = 0, sumaPrecio = 0;
+			for(Object[] fila : Tienda.datosCocinas) {
+				sumaPrecio += Double.parseDouble(fila[1].toString());
+				if (Double.parseDouble(fila[1].toString()) > precioMenor) {
+					
+				}
+			}
+			precioPromedio = sumaPrecio / 5;
 			imprimir("");
-			imprimir(" Precio promedio               : " + "S/." + Tienda.precio0);
+			imprimir(" Precio promedio               : " + "S/." + precioPromedio);
 			imprimir(" Precio menor                  : " + "S/." + Tienda.precio3);
 			imprimir(" Precio mayor                  : " + "S/." + Tienda.precio1);
 			imprimir("");
