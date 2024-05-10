@@ -33,7 +33,17 @@ public class ModificarCocina extends JFrame implements ActionListener {
 	private JButton btnGrabar;
 	private JButton btnCerrar;
 	
+<<<<<<< HEAD
 
+=======
+//	public static Object[][] datosCocinas = {
+//	        { "Mabe EMP6120PG0", 949.0, 60.0, 91.0, 58.6, 4 },
+//	        { "Indurama Parma", 1089.0, 80.0, 94.0, 67.5, 6 },
+//	        { "Sole COSOL027", 850.0, 60.0, 90.0, 50.0, 4 },
+//	        { "Coldex CX602", 629.0, 61.6, 95.0, 51.5, 5 },
+//	        { "Reco Dakota", 849.0, 75.4, 94.5, 66.0, 5 }
+// };
+>>>>>>> 1c1794877c01b72473f11db8ff333db7354b1bde
 	
 
 	/**
@@ -178,6 +188,7 @@ public class ModificarCocina extends JFrame implements ActionListener {
 	}
 	protected void actionPerformedBtnGrabar(ActionEvent e) {
 		
+<<<<<<< HEAD
 		// Obtener el modelo seleccionado
 	    String modeloSeleccionado = (String) comboBoxModelo.getSelectedItem();
 	    
@@ -201,6 +212,12 @@ public class ModificarCocina extends JFrame implements ActionListener {
 	    }
 	    
 	    // Buscar la cocina correspondiente en los datosCocinas
+=======
+		//Obtener el modelo seleccionado
+		String modeloSeleccionado = (String) comboBoxModelo.getSelectedItem();
+		
+		// Buscar la cocina correspondiente en los datosCocinas
+>>>>>>> 1c1794877c01b72473f11db8ff333db7354b1bde
 	    for (Object[] cocina : Tienda.datosCocinas) {
 	        if (cocina[0].equals(modeloSeleccionado)) {
 	            // Actualizar los datos con los valores de los campos de texto convertidos
