@@ -174,16 +174,15 @@ public class Vender extends JFrame implements ActionListener {
 
 		// declaración de variables internas
 		Double precio, impCompra, impDescuento, impPagar, portDescuento;
-		String descripcionModelo, obsequio, mensaje, desBoleta;
+		String descripcionModelo, obsequio;
 
 		// lectura de controles
 		modelo = cmbModelo.getSelectedIndex();
 		descripcionModelo = cmbModelo.getSelectedItem().toString();
 
-		// Validad Cantidad ingresa Sea Diferente que Vacio y 0 unidades
-
+		// Valida la Cantidad ingresada que Sea Diferente de Vacio o 0 unidades
 		if (textCantidad.getText().equals("0") || textCantidad.getText().equals("")) {
-			mostrarMensaje("Debe ingresar una cantidad válida.") ;
+			mostrarMensajeValidacion("Debe ingresar una cantidad válida.") ;
 			return;
 		}
 		
@@ -193,10 +192,11 @@ public class Vender extends JFrame implements ActionListener {
 				Integer.parseInt(textCantidad.getText());
 			}
 		} catch (NumberFormatException nfe) {
-			mostrarMensaje("Debe ingresar un número entero.") ;
+			mostrarMensajeValidacion("Debe ingresar un número entero.") ;
 			return;
 		}
 
+		//leer la cantidad ingresada
 		cantidad = Integer.parseInt(textCantidad.getText());
 
 		// Utilizando el Metodo buscarPrecio
@@ -205,7 +205,7 @@ public class Vender extends JFrame implements ActionListener {
 		// calcular importe compra
 		impCompra = precio * cantidad;
 
-		// Ulitizando el Metodod buscarPorcentajeDescuento
+		// Ulitizando el Metodo buscarPorcentajeDescuento
 		portDescuento = buscarPorcentajeDescuento(cantidad);
 
 		// Utilizando el Metodo buscarObsequio
@@ -242,7 +242,7 @@ public class Vender extends JFrame implements ActionListener {
 	}
 
 	//Metodo para mostrar mensaje de validacion
-	void mostrarMensaje(String mensaje) {
+	void mostrarMensajeValidacion(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "Mensaje de Vadilación",  JOptionPane.ERROR_MESSAGE);
 		textCantidad.setText("");
 		textCantidad.grabFocus();		
@@ -252,8 +252,6 @@ public class Vender extends JFrame implements ActionListener {
 	// Metodo para Buscar el Precio
 	Double buscarPrecio() {
 		Double precio = Double.parseDouble(textPrecio.getText());
-
-		
 		return precio;
 	}
 
@@ -289,17 +287,24 @@ public class Vender extends JFrame implements ActionListener {
 		return obsequio;
 	}
 
+	
 	void mostraAlertaCantidadVentas() {
+		//Para armar el mensaje que se va a mostrar
 		String mensaje = "";
-		// Mostrar mensaje de Ventas (cada 5 ventas)
-		// contarVentas es una variable global
+		
+		// Contar las ventas que se registran, es una variable global
 		Tienda.contarVentas++;
+	
+		// Evaluar las 5 ventas
 		if (Tienda.contarVentas == 5) {
 			mensaje = "Venta Nro." + Tienda.contarVentas + "\n";
 			mensaje = mensaje + "Importe Total general acumulado: S/." + Tienda.totalVentas + "\n";
 			mensaje = mensaje + "Porcentaje de la Cuota diaria: " + Tienda.porcentajeVentas + "% \n";
+			
+			//mostrar mensaje en el cuadro de dialogo
 			JOptionPane.showMessageDialog(null, mensaje);
-
+			
+			//reinicar la variable global contarVentas = 0
 			Tienda.contarVentas = 0;
 		}
 
@@ -308,6 +313,7 @@ public class Vender extends JFrame implements ActionListener {
 	// Metodo para Guardar Ventas
 	void guardarVenta(String descripcionModelo, Double precio, int cantidad, Double impCompra, Double impDescuento,
 			Double impPagar, String obsequio) {
+		
 		// Guardar registro Ventas
 		Object[] datoVenta = new Object[7];
 		datoVenta[0] = descripcionModelo;
@@ -329,13 +335,13 @@ public class Vender extends JFrame implements ActionListener {
 		// Imprimir Boleta
 		desBoleta = "BOLETA DE VENTA \n\n";
 
-		desBoleta = desBoleta + "Modelo \t\t: " + descripcionModelo + "\n";
-		desBoleta = desBoleta + "Precio \t\t: " + precio + "\n";
-		desBoleta = desBoleta + "Cantidad \t\t: " + cantidad + "\n";
-		desBoleta = desBoleta + "Importe compra \t: " + impCompra + "\n";
-		desBoleta = desBoleta + "Importe descuento ("+ porDescuento +" %) \t: " + impDescuento + "\n";
-		desBoleta = desBoleta + "Importe pagar \t\t: " + impPagar + "\n";
-		desBoleta = desBoleta + "Obsequio \t\t: " + obsequio;
+		desBoleta +=  "Modelo \t\t: " + descripcionModelo + "\n";
+		desBoleta +=  "Precio \t\t: " + precio + "\n";
+		desBoleta +=  "Cantidad \t\t: " + cantidad + "\n";
+		desBoleta +=  "Importe compra \t: " + impCompra + "\n";
+		desBoleta +=  "Importe descuento ("+ porDescuento +" %) \t: " + impDescuento + "\n";
+		desBoleta +=  "Importe pagar \t\t: " + impPagar + "\n";
+		desBoleta +=  "Obsequio \t\t: " + obsequio;
 
 		textResultado.setText(desBoleta);
 	}
