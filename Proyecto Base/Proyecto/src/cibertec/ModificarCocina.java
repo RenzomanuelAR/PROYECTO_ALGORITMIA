@@ -33,14 +33,7 @@ public class ModificarCocina extends JFrame implements ActionListener {
 	private JButton btnGrabar;
 	private JButton btnCerrar;
 	
-//	public static Object[][] datosCocinas = {
-//	        { "Mabe EMP6120PG0", 949.0, 60.0, 91.0, 58.6, 4 },
-//	        { "Indurama Parma", 1089.0, 80.0, 94.0, 67.5, 6 },
-//	        { "Sole COSOL027", 850.0, 60.0, 90.0, 50.0, 4 },
-//	        { "Coldex CX602", 629.0, 61.6, 95.0, 51.5, 5 },
-//	        { "Reco Dakota", 849.0, 75.4, 94.5, 66.0, 5 }
-// };
-	
+
 
 	/**
 	 * Launch the application.
@@ -184,18 +177,41 @@ public class ModificarCocina extends JFrame implements ActionListener {
 	}
 	protected void actionPerformedBtnGrabar(ActionEvent e) {
 		
-		//Obtener el modelo seleccionado
-		String modeloSeleccionado = (String) comboBoxModelo.getSelectedItem();
-		
+
+		// Obtener el modelo seleccionado
+	    String modeloSeleccionado = (String) comboBoxModelo.getSelectedItem();
+	    
+	    // Obtener los valores de los campos de texto
+	    double precio;
+	    double ancho;
+	    double alto;
+	    double fondo;
+	    int quemadores;
+	    
+	    try {
+	        precio = Double.parseDouble(textPrecio.getText());
+	        ancho = Double.parseDouble(textAncho.getText());
+	        alto = Double.parseDouble(textAlto.getText());
+	        fondo = Double.parseDouble(textFondo.getText());
+	        quemadores = Integer.parseInt(textQuemadores.getText());
+	    } catch (NumberFormatException ex) {
+	        System.err.println("Error al convertir valores numéricos: " + ex.getMessage());
+	        // Puedes mostrar un mensaje de error al usuario aquí si la conversión falla
+	        return; // Salir del método si hay un error de conversión
+	    }
+	    
+
+	
 		// Buscar la cocina correspondiente en los datosCocinas
+
 	    for (Object[] cocina : Tienda.datosCocinas) {
 	        if (cocina[0].equals(modeloSeleccionado)) {
-	            // Actualizar los datos con los valores de los campos de texto
-	            cocina[1] = Double.parseDouble(textPrecio.getText());
-	            cocina[2] = Double.parseDouble(textAncho.getText());
-	            cocina[3] = Double.parseDouble(textAlto.getText());
-	            cocina[4] = Double.parseDouble(textFondo.getText());
-	            cocina[5] = Integer.parseInt(textQuemadores.getText());
+	            // Actualizar los datos con los valores de los campos de texto convertidos
+	            cocina[1] = precio;
+	            cocina[2] = ancho;
+	            cocina[3] = alto;
+	            cocina[4] = fondo;
+	            cocina[5] = quemadores;
 	            break;
 	        }
 	    }
@@ -210,4 +226,5 @@ public class ModificarCocina extends JFrame implements ActionListener {
 		
 		 dispose();
 	}
+	
 }

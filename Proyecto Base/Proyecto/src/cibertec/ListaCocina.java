@@ -21,7 +21,6 @@ public class ListaCocina extends JFrame implements ActionListener {
 	private JButton btnCerrar;
 	private JButton btnListar;
 
-
 	
 	/**
 	 * Launch the application.
