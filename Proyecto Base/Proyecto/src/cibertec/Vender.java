@@ -176,7 +176,7 @@ public class Vender extends JFrame implements ActionListener {
 		Double precio, impCompra, impDescuento, impPagar, portDescuento;
 		String descripcionModelo, obsequio, mensaje, desBoleta;
 
-		// lectura de variables
+		// lectura de controles
 		modelo = cmbModelo.getSelectedIndex();
 		descripcionModelo = cmbModelo.getSelectedItem().toString();
 
