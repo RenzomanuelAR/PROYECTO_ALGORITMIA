@@ -22,14 +22,6 @@ public class ListaCocina extends JFrame implements ActionListener {
 	private JButton btnListar;
 
 	
-	public static Object[][] datosCocinas = {
-	        { "Mabe EMP6120PG0", 949.0, 60.0, 91.0, 58.6, 4 },
-	        { "Indurama Parma", 1089.0, 80.0, 94.0, 67.5, 6 },
-	        { "Sole COSOL027", 850.0, 60.0, 90.0, 50.0, 4 },
-	        { "Coldex CX602", 629.0, 61.6, 95.0, 51.5, 5 },
-	        { "Reco Dakota", 849.0, 75.4, 94.5, 66.0, 5 }
- };
-	
 	/**
 	 * Launch the application.
 	 */
@@ -92,7 +84,7 @@ public class ListaCocina extends JFrame implements ActionListener {
 	    sb.append("Listado de Cocinas:\n\n");
 
 	    // Iterar sobre los datos de cocinas y agregar cada cocina al texto
-	    for (Object[] cocina : datosCocinas) {
+	    for (Object[] cocina : Tienda.datosCocinas) {
 	        sb.append("Modelo: ").append(cocina[0]).append("\n");
 	        sb.append("Precio: S/. ").append(cocina[1]).append("\n");
 	        sb.append("Profundidad: ").append(cocina[2]).append(" cm\n");
