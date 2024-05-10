@@ -183,8 +183,7 @@ public class Vender extends JFrame implements ActionListener {
 		// Validad Cantidad ingresa Sea Diferente que Vacio y 0 unidades
 
 		if (textCantidad.getText().equals("0") || textCantidad.getText().equals("")) {
-
-			JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad válida.", "Mensaje de Vadilación",  JOptionPane.ERROR_MESSAGE);
+			mostrarMensaje("Debe ingresar una cantidad válida.") ;
 			return;
 		}
 		
@@ -194,9 +193,7 @@ public class Vender extends JFrame implements ActionListener {
 				Integer.parseInt(textCantidad.getText());
 			}
 		} catch (NumberFormatException nfe) {
-			JOptionPane.showMessageDialog(null, "Debe ingresar un número entero.", "Mensaje de Vadilación",  JOptionPane.ERROR_MESSAGE);
-			textCantidad.setText("");
-			textCantidad.grabFocus();
+			mostrarMensaje("Debe ingresar un número entero.") ;
 			return;
 		}
 
@@ -235,7 +232,7 @@ public class Vender extends JFrame implements ActionListener {
 		guardarVenta(descripcionModelo, precio, cantidad, impCompra, impDescuento, impPagar, obsequio);
 
 		// Imprimir Boleta
-		imprimirBoleta(descripcionModelo, precio, cantidad, impCompra, impDescuento, impPagar, obsequio);
+		imprimirBoleta(descripcionModelo, precio, cantidad, impCompra, impDescuento, impPagar, obsequio,portDescuento);
 
 		// Limpiar Controles
 		textCantidad.setText("");
@@ -244,6 +241,14 @@ public class Vender extends JFrame implements ActionListener {
 		// Fin
 	}
 
+	//Metodo para mostrar mensaje de validacion
+	void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje, "Mensaje de Vadilación",  JOptionPane.ERROR_MESSAGE);
+		textCantidad.setText("");
+		textCantidad.grabFocus();		
+	}
+	
+	
 	// Metodo para Buscar el Precio
 	Double buscarPrecio() {
 		Double precio = Double.parseDouble(textPrecio.getText());
@@ -319,7 +324,7 @@ public class Vender extends JFrame implements ActionListener {
 
 	// Metodo Para Imprimir Boleta
 	void imprimirBoleta(String descripcionModelo, Double precio, int cantidad, Double impCompra, Double impDescuento,
-			Double impPagar, String obsequio) {
+			Double impPagar, String obsequio, double porDescuento) {
 		String desBoleta = "";
 		// Imprimir Boleta
 		desBoleta = "BOLETA DE VENTA \n\n";
@@ -328,7 +333,7 @@ public class Vender extends JFrame implements ActionListener {
 		desBoleta = desBoleta + "Precio \t\t: " + precio + "\n";
 		desBoleta = desBoleta + "Cantidad \t\t: " + cantidad + "\n";
 		desBoleta = desBoleta + "Importe compra \t: " + impCompra + "\n";
-		desBoleta = desBoleta + "Importe descuento \t: " + impDescuento + "\n";
+		desBoleta = desBoleta + "Importe descuento ("+ porDescuento +" %) \t: " + impDescuento + "\n";
 		desBoleta = desBoleta + "Importe pagar \t\t: " + impPagar + "\n";
 		desBoleta = desBoleta + "Obsequio \t\t: " + obsequio;
 

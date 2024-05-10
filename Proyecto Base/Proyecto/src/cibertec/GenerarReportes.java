@@ -88,6 +88,8 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 						"Precios en relación al precio promedio", "Promedios, menores y mayores" }));
 		cboReporte.setBounds(113, 20, 336, 22);
 		contentPanel.add(cboReporte);
+		reportedeVentas();
+		imprimirDatos(0);
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCerrar) {
@@ -283,6 +285,7 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			imprimir(" Ancho menor                : " + "S/." + anchoMenor);
 			imprimir(" Ancho mayor                : " + "S/." + anchoMayor);
 			// Fin.
+			
 			// Inicio Promedio, mayor, menor del Fondo
 			double fondoPromedio = 0, fondoMenor = 0, fondoMayor = 0, sumaFondo = 0;
 			double fondoActual = 0;
@@ -310,6 +313,7 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			imprimir(" Fondo menor                : " + "S/." + fondoMenor);
 			imprimir(" Fondo mayor                : " + "S/." + fondoMayor);
 			// Fin.
+			
 			// Inicio Promedio, mayor, menor del Alto
 			double altoPromedio = 0, altoMenor = 0, altoMayor = 0, sumaAlto = 0;
 			double altoActual = 0;
@@ -337,6 +341,7 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			imprimir(" Alto menor                 : " + "S/." + altoMenor);
 			imprimir(" Alto mayor                 : " + "S/." + altoMayor);
 			// Fin.
+			
 			// Inicio Promedio, mayor, menor del Quemador
 			int quemadoresPromedio = 0, quemadoresMenor = 0, quemadoresMayor = 0, sumaQuemadores = 0;
 			int quemadoresActual = 0;
