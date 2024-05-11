@@ -24,7 +24,7 @@ public class ConfigurarObsequios extends JFrame implements ActionListener {
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 
-	Validacion validacion = new Validacion();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -99,30 +99,7 @@ public class ConfigurarObsequios extends JFrame implements ActionListener {
 	protected void actionPerformedBtnAceptar(ActionEvent e) {
 		
 		
-		// Validar la Cantidad ingresada Sea Diferente de Vacio o 0 unidades
-		boolean esVacio = validacion.validacionEsVacioEsCero(textUnidad1.getText(), "Debe ingresar una cantidad válida.");
-		if(esVacio == true) {
-			textUnidad1.setText("");
-			textUnidad1.grabFocus();	
-			return;
-		}
-		
-		// Validar la Cantidad ingresada Sea Diferente de Vacio o 0 unidades
-		esVacio = validacion.validacionEsVacioEsCero(textUnidad2.getText(), "Debe ingresar una cantidad válida.");
-		if(esVacio == true) {
-			textUnidad2.setText("");
-			textUnidad2.grabFocus();	
-			return;
-		}
-		
-		// Validar la Cantidad ingresada Sea Diferente de Vacio o 0 unidades
-		esVacio = validacion.validacionEsVacioEsCero(textUnidad3.getText(), "Debe ingresar una cantidad válida.");
-		if(esVacio == true) {
-			textUnidad3.setText("");
-			textUnidad3.grabFocus();	
-			return;
-		}
-		
+	
 	}
 	
 
