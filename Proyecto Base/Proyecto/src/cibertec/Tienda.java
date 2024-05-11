@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class Tienda extends JFrame implements ActionListener {
 
@@ -268,4 +269,7 @@ public class Tienda extends JFrame implements ActionListener {
         }
  
 	}
+	
+
+
 }

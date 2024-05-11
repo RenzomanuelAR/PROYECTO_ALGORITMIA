@@ -36,6 +36,7 @@ public class Vender extends JFrame implements ActionListener {
 	private JScrollPane scrollPane_1;
 	private JTextArea textResultado;
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -180,19 +181,21 @@ public class Vender extends JFrame implements ActionListener {
 		modelo = cmbModelo.getSelectedIndex();
 		descripcionModelo = cmbModelo.getSelectedItem().toString();
 
-		// Valida la Cantidad ingresada que Sea Diferente de Vacio o 0 unidades
-		if (textCantidad.getText().equals("0") || textCantidad.getText().equals("")) {
-			mostrarMensajeValidacion("Debe ingresar una cantidad válida.") ;
+		// Validar la Cantidad ingresada Sea Diferente de Vacio o 0 unidades
+		boolean esVacio = validacionEsVacioEsCero(textCantidad.getText(), "Debe ingresar una cantidad válida.");
+		if(esVacio == true) {
+			textCantidad.setText("");
+			textCantidad.grabFocus();	
 			return;
 		}
+	
+		//Validar la cantidad ingresada sea diferente se un dato númerico
+		boolean esNumero = esNumero(textCantidad.getText());
 		
-		//Validad que los datos ingresados sean de tipo numéricos
-		try {
-			if (textCantidad.getText() != null) {
-				Integer.parseInt(textCantidad.getText());
-			}
-		} catch (NumberFormatException nfe) {
-			mostrarMensajeValidacion("Debe ingresar un número entero.") ;
+		//negamos el valor logico devuelto por el metodo validacion.esNumero
+		if(esNumero == false) {
+			textCantidad.setText("");
+			textCantidad.grabFocus();	
 			return;
 		}
 
@@ -225,9 +228,6 @@ public class Vender extends JFrame implements ActionListener {
 		// sobre la cuota diaria
 		Tienda.porcentajeVentas = ((Tienda.totalVentas * 100) / Tienda.cuotaDiaria);
 
-		// Mostrar mensaje de Ventas (cada 5 ventas)
-		mostraAlertaCantidadVentas();
-
 		// Guardar registro Ventas
 		guardarVenta(descripcionModelo, precio, cantidad, impCompra, impDescuento, impPagar, obsequio);
 
@@ -237,17 +237,12 @@ public class Vender extends JFrame implements ActionListener {
 		// Limpiar Controles
 		textCantidad.setText("");
 		textCantidad.grabFocus();
+		
+		// Mostrar mensaje de Ventas (cada 5 ventas)
+		mostraAlertaCantidadVentas();		
 
 		// Fin
 	}
-
-	//Metodo para mostrar mensaje de validacion
-	void mostrarMensajeValidacion(String mensaje) {
-		JOptionPane.showMessageDialog(null, mensaje, "Mensaje de Vadilación",  JOptionPane.ERROR_MESSAGE);
-		textCantidad.setText("");
-		textCantidad.grabFocus();		
-	}
-	
 	
 	// Metodo para Buscar el Precio
 	Double buscarPrecio() {
@@ -345,6 +340,45 @@ public class Vender extends JFrame implements ActionListener {
 
 		textResultado.setText(desBoleta);
 	}
+	
+	//metodo validacionEsVacioEsCero: para validar si el dato ingresado es 0 o esta vacio
+	//--Parametros: 
+	//----datoEntrada: es el contenido a evaluar
+	//----mensaje: es lo que se mostrará en el cuadro de dialogo
+	public boolean validacionEsVacioEsCero(String datoEntrada,String mensaje) {
+		//Eliminar los espacios en blanco antes y despues de una cadena de texto
+		datoEntrada = datoEntrada.trim();
+		
+		//Si el contenido de la variable datoEntrada es igual a '0' o vacio 
+		if (datoEntrada.equals("0") || datoEntrada.equals("")) {
+			//muestra el cuadro dialogo de validación
+			JOptionPane.showMessageDialog(null, mensaje, "Mensaje de Vadilación",  JOptionPane.ERROR_MESSAGE);
+			return true;
+		}
+		return false;
+	}
+	
+	//metodo esNumero: para validar si el dato ingresado es un numero
+	//--Parametros: 
+	//----datoEntrada: es el contenido a evaluar
+	public boolean esNumero(String datoEntrada) {
+		boolean retornar = true;
+		//Validad que los datos ingresados sean de tipo numéricos
+		try {
+			//si el contenido es diferente de nulo
+			if (datoEntrada != null) {
+				//convertir a entero
+				Integer.parseInt(datoEntrada);
+			}
+		} catch (NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null, "Debe ingresar un número entero.", "Mensaje de Vadilación",  JOptionPane.ERROR_MESSAGE);
+			retornar = false;
+		}
+		
+		return retornar;
+	}
+	
+	
 
 	protected void actionPerformedBtncerrar(ActionEvent e) {
 		dispose();
