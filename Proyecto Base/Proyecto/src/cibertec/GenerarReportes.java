@@ -151,7 +151,7 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			// Generación del informe
 			//Se concatena el valores en la variable reportVenta
 			reportVenta += "Modelo                            : " + filaReporte[0] + "\n";
-			reportVenta += "Cantidad de ventas               : " + filaReporte[4] + "\n";
+			reportVenta += "Cantidad de ventas                : " + filaReporte[4] + "\n";
 			reportVenta += "Cantidad de unidades vendidas     : " + filaReporte[1] + "\n";
 			reportVenta += "Importe total vendido             : " + "S/." + filaReporte[2] + "\n";
 			reportVenta += "Aporte a la cuota diaria          : " + filaReporte[3] + "%" + "\n";
