@@ -169,10 +169,6 @@ public class Tienda extends JFrame implements ActionListener {
 		mntmVentGenerar.addActionListener(this);
 		mnVentas.add(mntmVentGenerar);
 		
-		mntmEjemploReporte = new JMenuItem("Ejemplo Reporte");
-		mntmEjemploReporte.addActionListener(this);
-		mnVentas.add(mntmEjemploReporte);
-		
 		
 		mnConfiguracion = new JMenu("Configuración");
 		menuBar.add(mnConfiguracion);
@@ -263,10 +259,6 @@ public class Tienda extends JFrame implements ActionListener {
 			frame.setVisible(true);
         }
  
-        if (e.getSource()==mntmEjemploReporte) {
-        	EjemploReporte frame = new EjemploReporte();
-			frame.setVisible(true);
-        }
  
 	}
 	
