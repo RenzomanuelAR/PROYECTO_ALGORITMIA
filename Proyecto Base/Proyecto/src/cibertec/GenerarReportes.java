@@ -88,6 +88,9 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 						"Precios en relación al precio promedio", "Promedios, menores y mayores" }));
 		cboReporte.setBounds(113, 20, 336, 22);
 		contentPanel.add(cboReporte);
+		
+		reportedeVentas();
+		imprimirDatos(0);
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCerrar) {

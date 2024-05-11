@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -88,8 +89,10 @@ public class ConfigurarCuotaDiaria extends JFrame implements ActionListener {
             // Convertir el valor a entero y actualizar cantidadOptima en Tienda
             int nuevaCantidad = Integer.parseInt(cantidadStr);
             Tienda.cuotaDiaria = nuevaCantidad;
+        	JOptionPane.showMessageDialog(null, "Configuracion grabada", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
         } catch (NumberFormatException ex) {
-            System.err.println("Error: Ingrese un número válido.");
+        	JOptionPane.showMessageDialog(null, "Dato no valido", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         dispose(); // Cerrar la ventana después de actualizar cantidadOptima
