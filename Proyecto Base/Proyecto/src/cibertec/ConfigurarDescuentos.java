@@ -6,8 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConfigurarDescuentos extends JFrame {
 
@@ -17,10 +20,10 @@ public class ConfigurarDescuentos extends JFrame {
 	private JLabel lblUnidad2;
 	private JLabel lblUnidad3;
 	private JLabel lblUnidad4;
-	private JTextField textUnidad1;
-	private JTextField textUnidad2;
-	private JTextField textUnidad3;
-	private JTextField textUnidad4;
+	private JTextField txtUnidad1;
+	private JTextField txtUnidad2;
+	private JTextField txtUnidad3;
+	private JTextField txtUnidad4;
 	private JLabel lblUnidad1_1;
 	private JLabel lblUnidad1_2;
 	private JLabel lblUnidad1_3;
@@ -73,25 +76,25 @@ public class ConfigurarDescuentos extends JFrame {
 		lblUnidad4.setBounds(21, 87, 120, 14);
 		contentPane.add(lblUnidad4);
 		
-		textUnidad1 = new JTextField();
-		textUnidad1.setBounds(142, 8, 86, 20);
-		contentPane.add(textUnidad1);
-		textUnidad1.setColumns(10);
+		txtUnidad1 = new JTextField();
+		txtUnidad1.setBounds(142, 8, 86, 20);
+		contentPane.add(txtUnidad1);
+		txtUnidad1.setColumns(10);
 		
-		textUnidad2 = new JTextField();
-		textUnidad2.setColumns(10);
-		textUnidad2.setBounds(142, 33, 86, 20);
-		contentPane.add(textUnidad2);
+		txtUnidad2 = new JTextField();
+		txtUnidad2.setColumns(10);
+		txtUnidad2.setBounds(142, 33, 86, 20);
+		contentPane.add(txtUnidad2);
 		
-		textUnidad3 = new JTextField();
-		textUnidad3.setColumns(10);
-		textUnidad3.setBounds(142, 58, 86, 20);
-		contentPane.add(textUnidad3);
+		txtUnidad3 = new JTextField();
+		txtUnidad3.setColumns(10);
+		txtUnidad3.setBounds(142, 58, 86, 20);
+		contentPane.add(txtUnidad3);
 		
-		textUnidad4 = new JTextField();
-		textUnidad4.setColumns(10);
-		textUnidad4.setBounds(142, 84, 86, 20);
-		contentPane.add(textUnidad4);
+		txtUnidad4 = new JTextField();
+		txtUnidad4.setColumns(10);
+		txtUnidad4.setBounds(142, 84, 86, 20);
+		contentPane.add(txtUnidad4);
 		
 		lblUnidad1_1 = new JLabel("%");
 		lblUnidad1_1.setBounds(235, 11, 23, 14);
@@ -110,11 +113,53 @@ public class ConfigurarDescuentos extends JFrame {
 		contentPane.add(lblUnidad1_4);
 		
 		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        if (txtUnidad1.getText().trim().equals("")) {
+		            JOptionPane.showMessageDialog(null, "Dato no válido en 1 a 5 unidades", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+		        if (txtUnidad2.getText().trim().equals("")) {
+		            JOptionPane.showMessageDialog(null, "Dato no válido en 6 a 10 unidades", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+		        if (txtUnidad3.getText().trim().equals("")) {
+		            JOptionPane.showMessageDialog(null, "Dato no válido en 11 a 15 unidades", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+		        if (txtUnidad4.getText().trim().equals("")) {
+		            JOptionPane.showMessageDialog(null, "Dato no válido en Más de 15 unidades", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+
+		        // Asignar los valores de los campos a las propiedades estáticas de Tienda
+		        try {
+		            Tienda.porcentaje1 = Double.parseDouble(txtUnidad1.getText());
+		            Tienda.porcentaje2 = Double.parseDouble(txtUnidad2.getText());
+		            Tienda.porcentaje3 = Double.parseDouble(txtUnidad3.getText());
+		            Tienda.porcentaje4 = Double.parseDouble(txtUnidad4.getText());
+
+		            JOptionPane.showMessageDialog(null, "Configuración GUARDADA", "Configuración", JOptionPane.INFORMATION_MESSAGE);
+		        } catch (NumberFormatException ex) {
+		            JOptionPane.showMessageDialog(null, "Error al convertir porcentajes a números", "Error", JOptionPane.ERROR_MESSAGE);
+		        }
+		
+			}
+		});
 		btnAceptar.setBounds(317, 11, 89, 23);
 		contentPane.add(btnAceptar);
 		
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(317, 45, 89, 23);
 		contentPane.add(btnCancelar);
+		
+		mostrarDescuento();
 	}
+	void mostrarDescuento() {
+	    txtUnidad1.setText(String.valueOf(Tienda.porcentaje1));
+	    txtUnidad2.setText(String.valueOf(Tienda.porcentaje2));
+	    txtUnidad3.setText(String.valueOf(Tienda.porcentaje3));
+	    txtUnidad4.setText(String.valueOf(Tienda.porcentaje4));
+	}
+
 }
