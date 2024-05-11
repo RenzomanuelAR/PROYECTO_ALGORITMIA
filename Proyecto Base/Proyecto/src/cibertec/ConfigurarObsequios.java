@@ -8,8 +8,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class ConfigurarObsequios extends JFrame {
+public class ConfigurarObsequios extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -22,6 +24,7 @@ public class ConfigurarObsequios extends JFrame {
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 
+	Validacion validacion = new Validacion();
 	/**
 	 * Launch the application.
 	 */
@@ -79,6 +82,7 @@ public class ConfigurarObsequios extends JFrame {
 		contentPane.add(textUnidad3);
 		
 		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(this);
 		btnAceptar.setBounds(306, 14, 89, 23);
 		contentPane.add(btnAceptar);
 		
@@ -86,5 +90,40 @@ public class ConfigurarObsequios extends JFrame {
 		btnCancelar.setBounds(306, 48, 89, 23);
 		contentPane.add(btnCancelar);
 	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAceptar) {
+			actionPerformedBtnAceptar(e);
+		}
+	}
+	protected void actionPerformedBtnAceptar(ActionEvent e) {
+		
+		
+		// Validar la Cantidad ingresada Sea Diferente de Vacio o 0 unidades
+		boolean esVacio = validacion.validacionEsVacioEsCero(textUnidad1.getText(), "Debe ingresar una cantidad válida.");
+		if(esVacio == true) {
+			textUnidad1.setText("");
+			textUnidad1.grabFocus();	
+			return;
+		}
+		
+		// Validar la Cantidad ingresada Sea Diferente de Vacio o 0 unidades
+		esVacio = validacion.validacionEsVacioEsCero(textUnidad2.getText(), "Debe ingresar una cantidad válida.");
+		if(esVacio == true) {
+			textUnidad2.setText("");
+			textUnidad2.grabFocus();	
+			return;
+		}
+		
+		// Validar la Cantidad ingresada Sea Diferente de Vacio o 0 unidades
+		esVacio = validacion.validacionEsVacioEsCero(textUnidad3.getText(), "Debe ingresar una cantidad válida.");
+		if(esVacio == true) {
+			textUnidad3.setText("");
+			textUnidad3.grabFocus();	
+			return;
+		}
+		
+	}
+	
 
 }
