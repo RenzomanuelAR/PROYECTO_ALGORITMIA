@@ -28,7 +28,7 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 	private JButton btnCerrar;
 	private JComboBox cboReporte;
 	private JTextArea txtS;
-	
+	// Declaración de la matriz de datos de reportes
 	public static Object[][] datosReportes = { 
 			{ "Mabe EMP6120PG0", 0, 0, 0, 0 }, 
 			{ "Indurama Parma", 0, 0, 0, 0 },
@@ -36,10 +36,10 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			{ "Coldex CX602", 0, 0, 0, 0 }, 
 			{ "Reco Dakota", 0, 0, 0, 0 } };
 	
-	// Declaracion de variables globales
+	// Declaración de variables globales
 	String reportVenta, reportveoptm, txtcanopt, model;
 	Integer canunven, canvenopt;
-	// Es una lista de ventas guardadas (Variable Global)
+	// Lista de ventas tipo Objeto guardadas (Variable Global)
 	List<Object[]> listaVentas = Tienda.datosVentas;
 
 	/**
@@ -88,8 +88,6 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 						"Precios en relación al precio promedio", "Promedios, menores y mayores" }));
 		cboReporte.setBounds(113, 20, 336, 22);
 		contentPanel.add(cboReporte);
-		reportedeVentas();
-		imprimirDatos(0);
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCerrar) {
@@ -105,9 +103,9 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 		}
 	}
 	protected void itemStateChangedCboReporte(ItemEvent e) {
-		// Declaracion de variables locales
+	    // Declaración de variables locales
 		int tipo;
-		// Entrada de datos
+	    // Entrada de datos y metodos
 		tipo = tiporeporte();
 		reportedeVentas();
 		reporteVentaOptima();
@@ -118,57 +116,75 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 	}
 	// Metodo de reporte de ventas
 	void reportedeVentas() {
+		//Asignamos un texto a la variable Globla reportVenta como titulo
 		reportVenta = "VENTAS POR MODELO :\n\n";
+		 // Declaración de variables locales
+		//La propiedad length se utiliza para obtener el número de elementos en un arreglo.
 		int cantidadCocinas = datosReportes.length;
+		//Se trata de un bucle for que itera sobre una matriz bidimensional llamada datosReportes
+		//Este bucle se utiliza para iterar a través de cada fila
 		for (Object[] filaReporte : datosReportes) {
+			//Cada fila se asigna a la variable filaReporte
+			//Asignación de valores
 			filaReporte[1] = 0;
 			filaReporte[2] = 0;
 			filaReporte[3] = 0;
 			filaReporte[4] = 0;
-			// recorrer cada fila de ventas
+			//Este bucle se utiliza para iterar a través de cada fila en el arreglo bidimensional listaVentas
 			for (Object[] filaVenta : listaVentas) {
+		    //Se verifica si el primer elemento de filaReporte es igual al primer elemento de filaVenta, se ejecutan las siguientes acciones
 				if (filaReporte[0].equals(filaVenta[0])) {
+					//Se incrementa en la suma
 					filaReporte[1] = Integer.parseInt(filaReporte[1].toString())+ Integer.parseInt(filaVenta[2].toString());
 					filaReporte[2] = Double.parseDouble(filaReporte[2].toString())+ Double.parseDouble(filaVenta[5].toString());
+					//Cálculo de porcentaje
 					filaReporte[3] = Double.parseDouble(filaReporte[2].toString()) / cantidadCocinas / 100;
+					//Incremento de contador
 					filaReporte[4] = Integer.parseInt(filaReporte[4].toString()) + 1;
 				}
 			}
 		}
-		// Imprimir acumulado de ventas por cada cocina
+		//El bucle for se utiliza para iterar sobre un conjunto de datos
+		//Estamos iterando sobre un conjunto de objetos llamado datosReportes
+		//Cada elemento de datosReportes se almacena en la variable filaReporte
 		for (Object[] filaReporte : datosReportes) {
-			// Guardar los datos respectivamente
+			// Generación del informe
+			//Se concatena el valores en la variable reportVenta
 			reportVenta += "Modelo                            : " + filaReporte[0] + "\n";
-			reportVenta += "Cantidad de ventass               : " + filaReporte[4] + "\n";
+			reportVenta += "Cantidad de ventas                : " + filaReporte[4] + "\n";
 			reportVenta += "Cantidad de unidades vendidas     : " + filaReporte[1] + "\n";
 			reportVenta += "Importe total vendido             : " + "S/." + filaReporte[2] + "\n";
 			reportVenta += "Aporte a la cuota diaria          : " + filaReporte[3] + "%" + "\n";
 			reportVenta += "\n";
 		}
 	}
-	// Metodo de ventas en relacion a la venta optima
+	// Método de reporte de ventas óptimas
 	void reporteVentaOptima() {
-
+		//Se trata de un bucle for que itera sobre una matriz bidimensional llamada datosReportes
+		//Este bucle se utiliza para iterar a través de cada fila
 		for (Object[] filaReporte : datosReportes) {
 			filaReporte[1] = 0;
 			filaReporte[2] = 0;
 			filaReporte[3] = 0;
-			// recorrer cada fila de ventas
+			//Este bucle se utiliza para iterar a través de cada fila en el arreglo bidimensional listaVentas
 			for (Object[] filaVenta : listaVentas) {
+			 //Se verifica si el primer elemento de filaReporte es igual al primer elemento de filaVenta, se ejecutan las siguientes acciones
 				if (filaReporte[0].equals(filaVenta[0])) {
-					filaReporte[1] = Integer.parseInt(filaReporte[1].toString())
-							+ Integer.parseInt(filaVenta[2].toString());
+					//Se incrementa en la suma
+					filaReporte[1] = Integer.parseInt(filaReporte[1].toString())+ Integer.parseInt(filaVenta[2].toString());
 				}
 			}
 		}
+		//Calcular y comparar la cantidad con la cantidad óptima
 		reportveoptm = "VENTAS EN RELACIÓN A LA VENTA ÓPTIMA :\n\n";
-		// Utilizar datos de las ventas guardadas
+		//El bucle for se utiliza para iterar sobre un conjunto de datos
 		for (Object[] fila : datosReportes) {
+			//Variable para volver de entero a cadena
 			String cantidadStr = "";
-			// Asignar una variable a respectiva fila de datos
+			//Asignar un valor a cada fila
 			canunven = Integer.parseInt(fila[1].toString());
 			model = String.valueOf(fila[0].toString());
-			// Calcular venta en relacion a la venta optima
+			//Calcular la cantidad optima usando selección doble if...else 
 			if (canunven > Tienda.cantidadOptima) {
 				canvenopt = (canunven - Tienda.cantidadOptima);
 				txtcanopt = "más que la cantidad óptima";
@@ -179,18 +195,19 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 				canvenopt = (canunven - Tienda.cantidadOptima);
 				txtcanopt = "igual a la cantidad óptima";
 			}
+			//Si el numero es 0 lo convertimos a string para que desaparezca
 			if (canvenopt == 0) {
 				cantidadStr = "";
 			} else {
 				cantidadStr = canvenopt.toString();
 			}
+			//Se concatena el valores en la variable reportveoptm
 			reportveoptm += "Modelo                          : " + model + "\n";
-			reportveoptm += "Cantidad de unidades vendidas   : " + canunven + "(" + cantidadStr + " " + txtcanopt + ")"
-					+ "\n";
+			reportveoptm += "Cantidad de unidades vendidas   : " + canunven + "(" + cantidadStr + " " + txtcanopt + ")"+ "\n";
 			reportveoptm += "\n";
 		}
 	}
-	// Mostrar reporte respectivamente
+	// Mostrar tipos de reporte
 	void imprimirDatos(int tipo) {
 		switch (tipo) {
 		case 0:
@@ -202,19 +219,27 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			imprimir(reportveoptm);
 			break;
 		case 2:
+			//Declaración de variables locales
 			double promedioPrecio = 0, sumaPrecios = 0;
+			//Asignamos una variable a la propiedad length
 			int cantidadCocinas = Tienda.datosCocinas.length;
-
+			//Este bucle se utiliza para iterar a través de cada fila de datosCocinas
 			for (Object[] filaCocina : Tienda.datosCocinas) {
-				sumaPrecios += Double.parseDouble(filaCocina[1].toString());
+			//La suma de los precios se acumulan en la variable sumaPrecio	
+			sumaPrecios += Double.parseDouble(filaCocina[1].toString());
 			}
+			//Calcular precio promedio de todas las cocinas
 			promedioPrecio = sumaPrecios / cantidadCocinas;
+			//Imprimir en el textArea
 			txtS.setText("");
 			imprimir(" PRECIOS EN RELACIÓN AL PRECIO PROMEDIO  : ");
 			imprimir(" Precio promnedio de una Cocina  : S/. " + promedioPrecio);
 			imprimir("");
+			//Este bucle se utiliza para iterar a través de cada fila de datosCocinas
 			for (Object[] fila : Tienda.datosCocinas) {
+				//Variable para volver de entero a cadena
 				String descripcion = "";
+				//Calcuño del mayor, menor, igual
 				if (Double.parseDouble(fila[1].toString()) > promedioPrecio) {
 					descripcion = " (Mayor al promedio)";
 				} else if (Double.parseDouble(fila[1].toString()) < promedioPrecio) {
@@ -222,6 +247,7 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 				} else {
 					descripcion = " (Igual al promedio)";
 				}
+				//Imprimir en el textArea
 				imprimir("");
 				imprimir(" Modelo     : " + fila[0]);
 				imprimir(" Precio     : " + "S/ ." + " " + fila[1] + descripcion);
@@ -231,11 +257,16 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			txtS.setText("");
 			imprimir(" PROMEDIOS, MENORES Y MAYORES  : ");
 			// Inicio Promedio, mayor, menor del Precio
+			//Inicialización de variables
 			double precioPromedio = 0, precioMenor = 0, precioMayor = 0, sumaPrecio = 0;
 			double precioActual = 0;
+			//Se utiliza como un indicador para que la inicialización de los valores solo ocurra una vez al comienzo del bucle.
 			int fila0 = 0;
+			//Este bucle se utiliza para iterar a través de cada fila de datosCocinas
 			for (Object[] fila : Tienda.datosCocinas) {
+				//Asignar un valor a la fila
 				precioActual = Double.parseDouble(fila[1].toString());
+				//Incrementar el valor de sumaPrecio
 				sumaPrecio += precioActual;
 				if (fila0 == 0) {
 					precioMenor = precioActual;
@@ -251,7 +282,9 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 					precioMayor = precioActual;
 				}
 			}
+			//Calcular precio promedio
 			precioPromedio = sumaPrecio / 5;
+			//Imprimir en el textArea
 			imprimir("");
 			imprimir(" Precio promedio            : " + "S/." + precioPromedio);
 			imprimir(" Precio menor               : " + "S/." + precioMenor);
@@ -285,7 +318,6 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			imprimir(" Ancho menor                : " + "S/." + anchoMenor);
 			imprimir(" Ancho mayor                : " + "S/." + anchoMayor);
 			// Fin.
-			
 			// Inicio Promedio, mayor, menor del Fondo
 			double fondoPromedio = 0, fondoMenor = 0, fondoMayor = 0, sumaFondo = 0;
 			double fondoActual = 0;
@@ -313,7 +345,6 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			imprimir(" Fondo menor                : " + "S/." + fondoMenor);
 			imprimir(" Fondo mayor                : " + "S/." + fondoMayor);
 			// Fin.
-			
 			// Inicio Promedio, mayor, menor del Alto
 			double altoPromedio = 0, altoMenor = 0, altoMayor = 0, sumaAlto = 0;
 			double altoActual = 0;
@@ -341,7 +372,6 @@ public class GenerarReportes extends JDialog implements ActionListener, ItemList
 			imprimir(" Alto menor                 : " + "S/." + altoMenor);
 			imprimir(" Alto mayor                 : " + "S/." + altoMayor);
 			// Fin.
-			
 			// Inicio Promedio, mayor, menor del Quemador
 			int quemadoresPromedio = 0, quemadoresMenor = 0, quemadoresMayor = 0, sumaQuemadores = 0;
 			int quemadoresActual = 0;
