@@ -26,6 +26,7 @@ public class ConfigurarObsequios extends JFrame {
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -101,7 +102,6 @@ public class ConfigurarObsequios extends JFrame {
 		Tienda.obsequio2=textUnidad2.getText();
 	    Tienda.obsequio3=textUnidad3.getText();  
 	    JOptionPane.showMessageDialog(null, "Configuracion GUARDADA", "Configuracion", JOptionPane.INFORMATION_MESSAGE);
-	    
 			}
 		});
 		btnAceptar.setBounds(306, 14, 89, 23);
@@ -119,4 +119,8 @@ public class ConfigurarObsequios extends JFrame {
     	 textUnidad2.setText(Tienda.obsequio2);
     	 textUnidad3.setText(Tienda.obsequio3);
      }
+
+	
+
+
 }
